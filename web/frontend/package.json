@@ -42,7 +42,7 @@
     "json-server": "^0.17.0",
     "prettier": "^2.7.1",
     "vue-template-compiler": "^2.7.0",
-    "xunit-viewer": "^7.1.9"
+    "xunit-viewer": "^10.3.0"
   },
   "browserslist": [
     "> 1%",
