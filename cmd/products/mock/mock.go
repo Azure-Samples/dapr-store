@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/benc-uk/dapr-store/cmd/products/spec"
+	"github.com/azure-samples/dapr-store/cmd/products/spec"
 )
 
 // ProductsService mock version

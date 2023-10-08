@@ -3,7 +3,7 @@ package spec
 import (
 	"errors"
 
-	productspec "github.com/benc-uk/dapr-store/cmd/products/spec"
+	productspec "github.com/azure-samples/dapr-store/cmd/products/spec"
 )
 
 // Order holds information about a customer order

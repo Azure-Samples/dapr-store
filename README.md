@@ -26,10 +26,8 @@ The application uses the following [Dapr Building Blocks](https://docs.dapr.io/d
 
 # Project Status
 
-![](https://img.shields.io/github/last-commit/benc-uk/dapr-store) ![](https://img.shields.io/github/release-date/benc-uk/dapr-store) ![](https://img.shields.io/github/v/release/benc-uk/dapr-store) ![](https://img.shields.io/github/commit-activity/m/benc-uk/dapr-store)
+![](https://img.shields.io/github/last-commit/azure-samples/dapr-store) ![](https://img.shields.io/github/release-date/azure-samples/dapr-store) ![](https://img.shields.io/github/v/release/azure-samples/dapr-store) ![](https://img.shields.io/github/commit-activity/m/azure-samples/dapr-store)
 
-Deployed instance: https://daprstore.kube.benco.io/  
-[![](https://img.shields.io/website?label=Hosted%3A%20Kubernetes&up_message=online&url=https%3A%2F%2Fdaprstore.kube.benco.io%2F)](https://daprstore.kube.benco.io/)
 
 # Application Elements & Services
 
@@ -191,22 +189,29 @@ This is a (very) basic guide to running Dapr Store locally. Only instructions fo
 ### Prereqs
 
 - Docker
-- Go v1.18+
-- Node.js v14+
+- GCC for CGO & go-sqlite3 (apt-get install build-essential)
+- Go v1.20+
+- Node.js v18+
 
 ### Setup
 
 Install and initialize Dapr
 
-```
+```bash
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
 dapr init
+```
+
+First time only, you will need to setup *go-sqlite3* library
+
+```bash
+CGO_ENABLED=1 go install github.com/mattn/go-sqlite3
 ```
 
 ### Clone repo
 
 ```bash
-git clone https://github.com/benc-uk/dapr-store/
+git clone https://github.com/azure-samples/dapr-store/
 ```
 
 ### Run all services
@@ -219,7 +224,7 @@ make run
 
 Access the store from http://localhost:9000/
 
-**💣 Gotcha!** The Vue frontend will start and display a message "App running at" saying it is running on port 8000, **do not access the frontend directly on this port, it will not function!**, always go via the gateway running on port 9000
+**💣 GOTCHA!** The Vue frontend will start and display a message "App running at" saying it is running on port 8000, **do not access the frontend directly on this port, it will not function!**, always go via the gateway running on port 9000
 
 # Working Locally
 
@@ -245,11 +250,11 @@ stop                 ⛔ Stop & kill everything started locally from `make run`
 
 A set of CI and CD release GitHub Actions workflows are included in `.github/workflows/`, automated builds are run in GitHub hosted runners
 
-### [GitHub Actions](https://github.com/benc-uk/dapr-store/actions)
+### [GitHub Actions](https://github.com/azure-samples/dapr-store/actions)
 
-[![](https://img.shields.io/github/workflow/status/benc-uk/dapr-store/CI%20Build%20App/master?label=CI+Build+App)](https://github.com/benc-uk/dapr-store/actions/workflows/ci-build.yml)
+[![](https://img.shields.io/github/workflow/status/azure-samples/dapr-store/CI%20Build%20App/master?label=CI+Build+App)](https://github.com/azure-samples/dapr-store/actions/workflows/ci-build.yml)
 
-[![](https://img.shields.io/github/workflow/status/benc-uk/dapr-store/Deploy%20To%20Kubernetes/master?label=Deploy+to+Kubernetes)](https://github.com/benc-uk/dapr-store/actions/workflows/deploy-k8s.yaml)
+[![](https://img.shields.io/github/workflow/status/azure-samples/dapr-store/Deploy%20To%20Kubernetes/master?label=Deploy+to+Kubernetes)](https://github.com/azure-samples/dapr-store/actions/workflows/deploy-k8s.yaml)
 
 # Security, Identity & Authentication
 
@@ -299,7 +304,7 @@ Frontend host config:
 
 # Roadmap & known issues
 
-See [project plan on GitHub](https://github.com/benc-uk/dapr-store/projects/1)
+See [project plan on GitHub](https://github.com/orgs/Azure-Samples/projects/34)
 
 # Concepts and Terms
 

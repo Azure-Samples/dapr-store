@@ -12,7 +12,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/benc-uk/dapr-store/cmd/cart/mock"
+	"github.com/azure-samples/dapr-store/cmd/cart/mock"
 	"github.com/benc-uk/go-rest-api/pkg/api"
 	"github.com/benc-uk/go-rest-api/pkg/auth"
 	"github.com/benc-uk/go-rest-api/pkg/httptester"

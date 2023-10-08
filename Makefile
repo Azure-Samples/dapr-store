@@ -7,7 +7,7 @@ DAPR_RUN_LOGLEVEL := warn
 
 # Most likely want to override these when calling `make image-all`
 IMAGE_REG ?= ghcr.io
-IMAGE_REPO ?= benc-uk/daprstore
+IMAGE_REPO ?= azure-samples/dapr-store
 IMAGE_TAG ?= latest
 IMAGE_PREFIX := $(IMAGE_REG)/$(IMAGE_REPO)
 
@@ -57,10 +57,10 @@ clean:  ## 🧹 Clean the project, remove modules, binaries and outputs
 
 run:  ## 🚀 Start & run everything locally as processes
 	cd $(FRONTEND_DIR); npm run serve &
-	dapr run --app-id cart     --app-port 9001 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/benc-uk/dapr-store/cmd/cart &
-	dapr run --app-id products --app-port 9002 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/benc-uk/dapr-store/cmd/products ./cmd/products/sqlite.db &
-	dapr run --app-id users    --app-port 9003 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/benc-uk/dapr-store/cmd/users &
-	dapr run --app-id orders   --app-port 9004 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/benc-uk/dapr-store/cmd/orders &
+	dapr run --app-id cart     --app-port 9001 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/cart &
+	dapr run --app-id products --app-port 9002 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/products ./cmd/products/sqlite.db &
+	dapr run --app-id users    --app-port 9003 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/users &
+	dapr run --app-id orders   --app-port 9004 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/orders &
 	@sleep 6
 	@./scripts/local-gateway/run.sh &
 	@sleep infinity
