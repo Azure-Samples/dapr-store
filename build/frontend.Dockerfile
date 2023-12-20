@@ -1,7 +1,7 @@
 # ===================================================================================
 # === Stage 1: Build static serving host ============================================
 # ===================================================================================
-FROM golang:1.19-alpine as server-build
+FROM golang:1.21-alpine as server-build
 
 WORKDIR /build
 
@@ -23,7 +23,7 @@ RUN GO111MODULE=on CGO_ENABLED=0 GOOS=linux go build \
 # ================================================================================================
 # === Stage 2: Build and bundle the Vue.js app with Vue CLI 3 ====================================
 # ================================================================================================
-FROM node:18-alpine as frontend-build
+FROM node:20-alpine as frontend-build
 
 ARG VERSION="0.0.1"
 ARG BUILD_INFO="Not provided"
