@@ -71,19 +71,3 @@ jobs:
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REG -u $GITHUB_ACTOR --password-stdin
           make docker-push-${{ matrix.serviceName }} IMAGE_TAG=$IMAGE_TAG
           make docker-push-${{ matrix.serviceName }} IMAGE_TAG=latest
-
-  # ===== Fire off the deployment workflow ======
-  trigger-deployment:
-    runs-on: ubuntu-latest
-    needs:
-      - build-images
-      - tests-linting
-    steps:
-      # Continuous deployment trigger
-      - name: "Trigger deployment with workflows_dispatch"
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: Deploy To Kubernetes
-          token: ${{ secrets.GH_PAT }}
-          inputs: '{ "IMAGE_TAG": "${{ env.IMAGE_TAG }}" }'
