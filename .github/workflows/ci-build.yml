@@ -45,15 +45,7 @@ jobs:
           make lint
 
       - name: "Run all unit tests"
-        run: make test-reports
-
-      # Very optional - upload of test results
-      - name: "Upload test reports to Azure"
-        if: ${{ success() || failure() }}
-        run: |
-          az storage blob upload-batch --account-name $STORAGE_ACCT_NAME --account-key "${{ secrets.STORAGE_KEY }}" \
-             --source ./output --destination \$web/${{ github.run_id }} --no-progress > /dev/null
-          echo -e "📜🌍 Test reports uploaded and viewable here - https://$STORAGE_ACCT_NAME.z6.web.core.windows.net/${{ github.run_id }}/"
+        run: make test
 
   # ===== Build container images ======
   build-images:

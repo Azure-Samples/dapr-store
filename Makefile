@@ -30,16 +30,6 @@ test:  ## 🎯 Unit tests for services and snapshot tests for SPA frontend
 	go test -v -count=1 ./$(SERVICE_DIR)/...
 	@cd $(FRONTEND_DIR); NODE_ENV=test npm run test -- --ci
 
-test-reports: $(FRONTEND_DIR)/node_modules  ## 📜 Unit tests with coverage and test reports (deprecated)
-	@rm -rf $(OUTPUT_DIR) && mkdir -p $(OUTPUT_DIR)
-	@which gotestsum || go install gotest.tools/gotestsum
-	gotestsum --junitfile $(OUTPUT_DIR)/unit-tests.xml ./$(SERVICE_DIR)/... --coverprofile $(OUTPUT_DIR)/coverage
-	cd $(FRONTEND_DIR); NODE_ENV=test npm run test -- --ci
-	./$(FRONTEND_DIR)/node_modules/.bin/xunit-viewer -r $(OUTPUT_DIR)/unit-tests.xml -o $(OUTPUT_DIR)/unit-tests.html
-	./$(FRONTEND_DIR)/node_modules/.bin/xunit-viewer -r $(OUTPUT_DIR)/unit-tests-frontend.xml -o $(OUTPUT_DIR)/unit-tests-frontend.html
-	go tool cover -html=$(OUTPUT_DIR)/coverage -o $(OUTPUT_DIR)/cover.html
-	cp testing/reports.html $(OUTPUT_DIR)/index.html
-	
 bundle: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
 	cd $(FRONTEND_DIR); npm run build
 	cd $(SERVICE_DIR)/frontend-host; go build

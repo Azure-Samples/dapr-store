@@ -188,7 +188,7 @@ func makeID(length int) string {
 	id := ""
 	possible := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
-	rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	for i := 0; i < length; i++ {
 		id += string(possible[rand.Intn(len(possible)-1)])
