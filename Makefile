@@ -1,7 +1,7 @@
 SERVICE_DIR := cmd
 FRONTEND_DIR := web/frontend
 OUTPUT_DIR := ./output
-VERSION ?= 0.8.3
+VERSION ?= 0.8.4
 BUILD_INFO ?= "Local makefile build"
 DAPR_RUN_LOGLEVEL := warn
 
@@ -32,11 +32,11 @@ test:  ## 🎯 Unit tests for services and snapshot tests for SPA frontend
 
 test-reports: $(FRONTEND_DIR)/node_modules  ## 📜 Unit tests with coverage and test reports (deprecated)
 	@rm -rf $(OUTPUT_DIR) && mkdir -p $(OUTPUT_DIR)
-	@which gotestsum || go get gotest.tools/gotestsum
+	@which gotestsum || go install gotest.tools/gotestsum
 	gotestsum --junitfile $(OUTPUT_DIR)/unit-tests.xml ./$(SERVICE_DIR)/... --coverprofile $(OUTPUT_DIR)/coverage
 	cd $(FRONTEND_DIR); NODE_ENV=test npm run test -- --ci
-	./$(FRONTEND_DIR)/node_modules/xunit-viewer/bin/xunit-viewer -r $(OUTPUT_DIR)/unit-tests.xml -o $(OUTPUT_DIR)/unit-tests.html
-	./$(FRONTEND_DIR)/node_modules/xunit-viewer/bin/xunit-viewer -r $(OUTPUT_DIR)/unit-tests-frontend.xml -o $(OUTPUT_DIR)/unit-tests-frontend.html
+	./$(FRONTEND_DIR)/node_modules/.bin/xunit-viewer -r $(OUTPUT_DIR)/unit-tests.xml -o $(OUTPUT_DIR)/unit-tests.html
+	./$(FRONTEND_DIR)/node_modules/.bin/xunit-viewer -r $(OUTPUT_DIR)/unit-tests-frontend.xml -o $(OUTPUT_DIR)/unit-tests-frontend.html
 	go tool cover -html=$(OUTPUT_DIR)/coverage -o $(OUTPUT_DIR)/cover.html
 	cp testing/reports.html $(OUTPUT_DIR)/index.html
 	

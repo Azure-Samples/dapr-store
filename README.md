@@ -33,8 +33,8 @@ The application uses the following [Dapr Building Blocks](https://docs.dapr.io/d
 
 The main elements and microservices that make up the Dapr Store system are described here
 
-Each service uses the [Go REST API Starter Kit & Library](https://github.com/benc-uk/go-rest-api) as a starting basis, lots of the boilerplate and 
-repeated code is located there.
+Each service uses the [Go REST API Starter Kit & Library](https://github.com/benc-uk/go-rest-api) as a starting basis. Most of the boilerplate and 
+base code for handling requests and generally acting as a RESTful HTTP endpoint is handled by this package.
 
 ## Service Code
 
@@ -258,28 +258,28 @@ A set of CI and CD release GitHub Actions workflows are included in `.github/wor
 
 # Security, Identity & Authentication
 
-The default mode of operation for the Dapr Store is in "demo mode" where there is no identity provided configured, and no security on the APIs. This makes it simple to run and allows us to focus on the Dapr aspects of the project. In this mode a demo/dummy user account can be used to sign-in and place orders in the store.
+The default mode of operation for the Dapr Store is in "demo mode" where there is no identity provider configured, and no security enforcement on the APIs. This makes it simple to run and allows us to focus on the Dapr aspects of the project. In this mode a demo/dummy user account is used to sign-in and place orders in the store.
 
-Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/) (aka Azure Active Directory v2) as an identity provider, to enable real user sign-in, and securing of the APIs.
+Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/) (aka Microsoft Entra ID) as an identity provider. This then supports real user sign-in, and securing of the APIs.
 
-#### [📃 SUB-SECTION: Full details on security, identity & authentication](./docs/auth-identity/)
+#### [📃 SECTION: Full details on security, identity & authentication](./docs/auth-identity/)
 
 # Configuration
 
 ## Environmental Variables
 
-The services support the following environmental variables. All settings are optional with default values.
+All services support the following environmental variables. All settings are optional with default values.
 
 - `PORT` - Port the server will listen on. See defaults below.
 - `AUTH_CLIENT_ID` - Used to enable integration with Azure AD for identity and authentication. Default is _blank_, which runs the service with no identity backend. See the [security, identity & authentication docs](#security-identity--authentication) for more details.
 - `DAPR_STORE_NAME` - Name of the Dapr state component to use. Default is `statestore`
 
-The following vars are used only by the Cart and Orders services:
+The following vars are used only by the *Cart* and *Orders* services:
 
 - `DAPR_ORDERS_TOPIC` - Name of the Dapr pub/sub topic to use for orders. Default is `orders-queue`
 - `DAPR_PUBSUB_NAME` - Name of the Dapr pub/sub component to use for orders. Default is `pubsub`
 
-The following vars are only used by the Orders service:
+The following vars are only used by the *Orders* service:
 
 - `DAPR_EMAIL_NAME` - Name of the Dapr SendGrid component to use for sending order emails. Default is `orders-email`
 - `DAPR_REPORT_NAME` - Name of the Dapr Azure Blob component to use for saving order reports. Default is `orders-report`
@@ -300,11 +300,7 @@ Frontend host config:
 
 ## Dapr Components
 
-#### [📃 SUB-SECTION: Details of the Dapr components used by the application and how to configure them.](components/)
-
-# Roadmap & known issues
-
-See [project plan on GitHub](https://github.com/orgs/Azure-Samples/projects/34)
+#### [📃 SECTION: Details of the Dapr components used by the application and how to configure them.](components/)
 
 # Concepts and Terms
 

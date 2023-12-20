@@ -1217,17 +1217,17 @@
     {
       "id": "e122e74b-ab9b-4629-ab73-d93b0a7b1b5e",
       "key": "productSchemaUrl",
-      "value": "https://raw.githubusercontent.com/benc-uk/dapr-store/main/cmd/products/spec/schema.json"
+      "value": "https://raw.githubusercontent.com/azure-samples/dapr-store/main/cmd/products/spec/schema.json"
     },
     {
       "id": "fa9e6fc5-afd5-4055-a910-661dfa7d5cbc",
       "key": "userSchemaUrl",
-      "value": "https://raw.githubusercontent.com/benc-uk/dapr-store/main/cmd/users/spec/schema.json"
+      "value": "https://raw.githubusercontent.com/azure-samples/dapr-store/main/cmd/users/spec/schema.json"
     },
     {
       "id": "b51f5d00-bb71-4210-aafa-57da418da3a2",
       "key": "orderSchemaUrl",
-      "value": "https://raw.githubusercontent.com/benc-uk/dapr-store/main/cmd/orders/spec/schema.json"
+      "value": "https://raw.githubusercontent.com/azure-samples/dapr-store/main/cmd/orders/spec/schema.json"
     }
   ]
 }

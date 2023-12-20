@@ -20,7 +20,7 @@ A reference application showcasing the use of Dapr
 | frontendHost.replicas | int | `1` | Dapr store frontend host replica count |
 | image.pullSecrets | list | `[]` | Any pullsecrets that are required to pull the image |
 | image.registry | string | `"ghcr.io"` | Image registry, only change if you're using your own images |
-| image.repo | string | `"benc-uk/daprstore"` | Image repository |
+| image.repo | string | `"benc-uk/azure-samples"` | Image repository |
 | image.tag | string | `"latest"` | Image tag |
 | ingress.certIssuer | string | `nil` | Cert manager issuer, leave unset to run in insecure mode |
 | ingress.certName | string | `nil` | Set this to enable TLS, leave unset to run in insecure mode |

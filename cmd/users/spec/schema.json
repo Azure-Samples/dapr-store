@@ -1,5 +1,5 @@
 {
-  "id": "https://raw.githubusercontent.com/benc-uk/dapr-store/master/cmd/user/spec/schema.json",
+  "id": "https://raw.githubusercontent.com/azure-samples/dapr-store/master/cmd/user/spec/schema.json",
   "type": "object",
   "title": "User entity",
   "required": ["email", "userId", "displayName", "profileImage"],
