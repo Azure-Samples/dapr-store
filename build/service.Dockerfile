@@ -31,7 +31,7 @@ RUN GO111MODULE=on CGO_ENABLED=$CGO_ENABLED GOOS=linux \
 # ================================================================================================
 # === Stage 2: Get server binary into a lightweight container ====================================
 # ================================================================================================
-FROM alpine
+FROM alpine:3.19
 WORKDIR /app 
 
 ARG SERVICE_NAME="SET_ON_COMMAND_LINE"

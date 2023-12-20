@@ -30,7 +30,7 @@ test:  ## 🎯 Unit tests for services and snapshot tests for SPA frontend
 	go test -v -count=1 ./$(SERVICE_DIR)/...
 	@cd $(FRONTEND_DIR); NODE_ENV=test npm run test -- --ci
 
-bundle: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
+frontend: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
 	cd $(FRONTEND_DIR); npm run build
 	cd $(SERVICE_DIR)/frontend-host; go build
 
