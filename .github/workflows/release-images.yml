@@ -9,6 +9,10 @@ env:
   BUILD_INFO: "Build:stable / Workflow:${{ github.workflow }} / RunId:${{ github.run_id }} / Ref:${{ github.ref }} / SHA:${{ github.sha }} / ImageTag:${{ github.event.release.tag_name }}"
   IMAGE_TAG: ${{ github.event.release.tag_name }}
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   release-images:
     runs-on: ubuntu-latest
