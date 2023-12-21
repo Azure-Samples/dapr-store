@@ -28,7 +28,7 @@ lint-fix: $(FRONTEND_DIR)/node_modules  ## 📝 Lint & format, fixes errors and 
 
 test:  ## 🎯 Unit tests for services and snapshot tests for SPA frontend 
 	go test -v -count=1 ./$(SERVICE_DIR)/...
-	@cd $(FRONTEND_DIR); NODE_ENV=test npm run test -- --ci
+	@cd $(FRONTEND_DIR); npm run test:unit
 
 frontend: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
 	cd $(FRONTEND_DIR); npm run build
