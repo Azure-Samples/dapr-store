@@ -2,9 +2,9 @@ name: dapr-store
 version: "3.9"
 
 # =====================================================================
-#  Docker compose file for Dapr Store
+# Docker compose file for Dapr Store
 # =====================================================================
-# Call via the makefile, otherwise you'll need to set all the vars!
+# Only use via the makefile, otherwise you'll need to set all the vars!
 # Use with `make docker-build`, `make docker-push` & `make docker-run`
 # =====================================================================
 
@@ -98,7 +98,7 @@ services:
   # ==============================================
 
   cart-dapr:
-    image: "daprio/daprd:edge"
+    image: "daprio/daprd:1.12.2"
     command: [ "./daprd", "--app-id", "cart", "--app-port", "9001", "--dapr-grpc-port", "50009", "--dapr-http-port", "3501", "--components-path", "/components", "--enable-metrics=false"]
     depends_on:
       - cart
@@ -107,7 +107,7 @@ services:
     - "../components/:/components"
 
   products-dapr:
-    image: "daprio/daprd:edge"
+    image: "daprio/daprd:1.12.2"
     command: [ "./daprd", "--app-id", "products", "--app-port", "9002", "--dapr-grpc-port", "50002", "--dapr-http-port", "3502", "--components-path", "/components", "--enable-metrics=false"]
     depends_on:
       - products
@@ -116,7 +116,7 @@ services:
     - "../components/:/components"
 
   users-dapr:
-    image: "daprio/daprd:edge"
+    image: "daprio/daprd:1.12.2"
     command: [ "./daprd", "--app-id", "users", "--app-port", "9003", "--dapr-grpc-port", "50003", "--dapr-http-port", "3503", "--components-path", "/components", "--enable-metrics=false"]
     depends_on:
       - users
@@ -125,7 +125,7 @@ services:
     - "../components/:/components"
 
   orders-dapr:
-    image: "daprio/daprd:edge"
+    image: "daprio/daprd:1.12.2"
     command: [ "./daprd", "--app-id", "orders", "--app-port", "9004", "--dapr-grpc-port", "50004", "--dapr-http-port", "3504", "--components-path", "/components", "--enable-metrics", "false"]
     depends_on:
       - orders

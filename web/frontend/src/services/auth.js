@@ -1,10 +1,10 @@
 // ----------------------------------------------------------------------------
-// Copyright (c) Ben Coleman, 2021
+// Copyright (c) Ben Coleman, 2019 - 2023
 // Licensed under the MIT License.
 //
 // Drop in MSAL.js 2.x service wrapper & helper for SPAs
-//   v2.1.0 - Ben Coleman 2019
 //   Updated 2021 - Switched to @azure/msal-browser
+//   Updated 2023 - Latest MSAL.js v3 changes
 // ----------------------------------------------------------------------------
 
 import * as msal from '@azure/msal-browser'
@@ -69,6 +69,7 @@ export default {
           return [JSON.parse(localStorage.getItem('dummyAccount'))]
         }
       }
+
       return
     }
 
@@ -96,10 +97,12 @@ export default {
         )
       } */
     }
-    console.log('### Azure AD sign-in: enabled\n', config)
+
+    console.log('### Azure AD sign-in: enabled with MSAL\n', config)
 
     // Create our shared/static MSAL app object
     msalApp = new msal.PublicClientApplication(config)
+    await msalApp.initialize()
   },
 
   //
@@ -110,7 +113,7 @@ export default {
       return null
     }
 
-    return msalApp.config.auth.clientId
+    return msalApp.getConfiguration().auth.clientId
   },
 
   //
@@ -121,7 +124,6 @@ export default {
       return
     }
 
-    //const LOGIN_SCOPES = ['user.read', 'openid', 'profile', 'email']
     await msalApp.loginPopup({
       scopes,
       prompt: 'select_account'

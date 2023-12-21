@@ -2,29 +2,30 @@
 
 The default mode of operation for the Dapr Store is in "demo mode" where there is no identity provided configured, and no security on the APIs. This makes it simple to run and allows us to focus on the Dapr aspects of the project. In this mode a demo/dummy user account can be used to sign-in and place orders in the store.
 
-Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/) (aka Azure Active Directory v2) as an identity provider, to enable real user sign-in, and securing of the APIs.
+Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://learn.microsoft.com/en-us/entra/identity-platform/) (aka Microsoft Entra ID) as an identity provider, to enable real user sign-in, and securing of the APIs.
 
 # Registering App
 
 Using the Azure CLI create the new app registration
 
-```
+```bash
 az ad app create --display-name="Dapr Store" \
-   --available-to-other-tenants=true \
-   --query "appId" -o tsv
+  --sign-in-audience AzureADandPersonalMicrosoftAccount \
+  --query "appId" -o tsv)
 ```
 
 Make a note of the GUID returned, this is the app ID, or client ID
 
 [Follow the guide here to further configure the app](https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-app-registration#redirect-uri-msaljs-20-with-auth-code-flow), this currently can't be done from the CLI
 
-Quick summary of the steps, from the portal under 'App registrations':
+Quick summary of the steps, from the Azure portal under 'App registrations':
 
 - Click _'Authentication'_
   - UNSELECT the checkbox _'ID tokens (used for implicit and hybrid flows)'_
   - Click _'Add a platform'_
     - Click _'Single page application'_
     - Enter `http://localhost:9000` as the redirect URI
+    - Ignore the other settings
 
 If you are hosting the app anywhere else, add the relevant redirect URIs
 
@@ -48,7 +49,7 @@ Note. If running a services directly from their own directory i.e. `cmd/cart/` t
 
 # Frontend
 
-This library has been used https://github.com/benc-uk/msal-graph-vue to add the auth and graph services to the app.
+[MSAL.js for browser](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser) is used to provide authentication to the web app frontend
 
 To enable auth, when working locally - create the following file `web/frontend/.env.development.local` and set `VUE_APP_AUTH_CLIENT_ID` with your client id. Note the `VUE_APP_` prefix, this is important.
 
@@ -59,7 +60,7 @@ When `AUTH_CLIENT_ID` is set the application behavior changes as follows:
 - Login page allows users to register, and sign-in with real user accounts in Azure AD.
 - If a user is signed-in, an access token is acquired via the auth service, and used for all API calls made by the frontend to the backend Dapr Store APIs. This token is requested for the scope `store-api`. The fetched access token is then added to the Authorization header of all API calls.
 
-In both cases if `AUTH_CLIENT_ID` is not found at `/config` or if `VUE_APP_AUTH_CLIENT_ID` is not set locally - then the app falls back into "demo user mode". The auth service provided by https://github.com/benc-uk/msal-graph-vue has a demo user feature and this is used.
+In both cases if `AUTH_CLIENT_ID` is not found at `/config` or if `VUE_APP_AUTH_CLIENT_ID` is not set locally - then the app falls back into "demo user mode" with a fake user account in the frontend.
 
 # Services & Token Validation
 
@@ -72,4 +73,4 @@ The JWTValidator function gets the access token from the authorization header, d
 - `scp` should equal "store-api"
 - `aud` should equal the client ID of the app
 
-If the authorization header is missing, the bearer token is missing, or the claims are not validated - then a HTTP 401 is returned.
+If the authorization header is missing, the bearer token is missing, or the claims are not validated - then a HTTP 401 response is returned.
