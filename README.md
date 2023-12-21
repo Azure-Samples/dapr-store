@@ -248,13 +248,11 @@ stop                 ⛔ Stop & kill everything started locally from `make run`
 
 # CI / CD
 
-A set of CI and CD release GitHub Actions workflows are included in `.github/workflows/`, automated builds are run in GitHub hosted runners
+A set of CI and CD release GitHub actions workflows are included in `.github/workflows/`, automated CI builds are run in GitHub hosted runners
 
 ### [GitHub Actions](https://github.com/azure-samples/dapr-store/actions)
 
-[![](https://img.shields.io/github/workflow/status/azure-samples/dapr-store/CI%20Build%20App/master?label=CI+Build+App)](https://github.com/azure-samples/dapr-store/actions/workflows/ci-build.yml)
-
-[![](https://img.shields.io/github/workflow/status/azure-samples/dapr-store/Deploy%20To%20Kubernetes/master?label=Deploy+to+Kubernetes)](https://github.com/azure-samples/dapr-store/actions/workflows/deploy-k8s.yaml)
+[![CI Build App](https://github.com/Azure-Samples/dapr-store/actions/workflows/ci-build.yml/badge.svg)](https://github.com/Azure-Samples/dapr-store/actions/workflows/ci-build.yml)
 
 # Security, Identity & Authentication
 
@@ -306,8 +304,8 @@ Frontend host config:
 
 Clarity of terminology is sometimes important, here's a small glossary
 
-- **Building Block** - [Specific Dapr term](https://github.com/dapr/docs/tree/master/concepts#building-blocks). A _building block_ is an API level feature of Dapr, such as 'state management' or 'pub/sub' or 'secrets'
-- **Component** - Component is another Dapr specific term. A _component_ is a plugin that provides implementation functionality to building blocks. As component is a generic & commonly used word, the term "Dapr component" will be used where ambiguity is possible
+- **Building Block** - [Specific Dapr term](https://docs.dapr.io/concepts/building-blocks-concept/). A _building block_ is an API level feature of Dapr, such as 'state management' or 'pub/sub' or 'secrets'. At the time of writing Dapr supports ten different building blocks.
+- **Component** - [Component](https://docs.dapr.io/concepts/components-concept/) is another Dapr specific term. A _component_ is a plugin that provides implementation functionality to building blocks. As component is a generic & commonly used word, the term "Dapr component" will be used where ambiguity is possible
 - **Service** - The microservices, written in Go and exposing REST API, either invoked through Dapr and.or using the Dapr API for things such as state.
 - **API Gateway** - NGINX reverse proxy sitting in front of the services. This is not to be confused with Azure API Management, Azure App Gateway or AWS API Gateway
 - **State** - Dapr state API, backed with a Dapr component state provider, e.g. Redis
