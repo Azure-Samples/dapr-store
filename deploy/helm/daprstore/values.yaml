@@ -6,7 +6,7 @@ image:
   # -- Image registry, only change if you're using your own images
   registry: ghcr.io
   # -- Image repository
-  repo: benc-uk/azure-samples
+  repo: azure-samples/dapr-store
   # -- Image tag
   tag: latest
   # -- Any pullsecrets that are required to pull the image
