@@ -1,10 +1,11 @@
-import { mount } from '@vue/test-utils'
-import flushPromises from 'flush-promises'
+import { describe, it, vi, expect } from 'vitest'
+import { flushPromises, mount } from '@vue/test-utils'
 import router from '@/router'
+
 import Account from '@/views/Account.vue'
 
-jest.mock('@/services/api')
-jest.mock('@/services/auth')
+vi.mock('@/services/auth')
+vi.mock('@/services/api')
 
 describe('Account.vue', () => {
   it('renders user profile', async () => {
@@ -15,6 +16,6 @@ describe('Account.vue', () => {
     })
 
     await flushPromises()
-    expect(wrapper.html()).toMatch('Mock User')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

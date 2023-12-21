@@ -77,10 +77,10 @@ export default {
   cartAddAmount: async function (username, productId, amount) {
     let count = 0
 
-    let cartResp = await this.cartGet(username)
+    const cartResp = await this.cartGet(username)
     if (cartResp) {
-      let cart = cartResp
-      let productCount = cart.products[productId]
+      const cart = cartResp
+      const productCount = cart.products[productId]
       if (productCount) {
         count = productCount + amount
       } else {
@@ -115,7 +115,7 @@ async function apiCall(apiPath, method = 'get', data = null) {
     'Content-Type': 'application/json'
   }
 
-  let url = `${apiEndpoint || '/'}${apiPath}`
+  const url = `${apiEndpoint || '/'}${apiPath}`
   console.log(`### API CALL ${method} ${url}`)
 
   // Only get a token if logged in & using real auth (i.e AUTH_CLIENT_ID set)
@@ -148,14 +148,14 @@ async function apiCall(apiPath, method = 'get', data = null) {
   }
 
   // Make the HTTP request
-  let resp = await fetch(url, request)
+  const resp = await fetch(url, request)
 
   // Decode error message when non-HTTP OK (200~299) is received
   if (!resp.ok) {
     let error = `API call to ${url} failed with ${resp.status} ${resp.statusText}`
     if (resp.headers.get('Content-Type') === 'application/json') {
       error = ''
-      let errorObj = await resp.json()
+      const errorObj = await resp.json()
       for (const [key, value] of Object.entries(errorObj)) {
         error += `${key}: '${value}', `
       }

@@ -19,9 +19,9 @@ export default {
   // https://docs.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http#response-1
   //
   async getSelf() {
-    let resp = await callGraph('/me')
+    const resp = await callGraph('/me')
     if (resp) {
-      let data = await resp.json()
+      const data = await resp.json()
       return data
     }
   },
@@ -31,9 +31,9 @@ export default {
   // https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL
   //
   async getPhoto() {
-    let resp = await callGraph('/me/photos/240x240/$value')
+    const resp = await callGraph('/me/photos/240x240/$value')
     if (resp) {
-      let blob = await resp.blob()
+      const blob = await resp.blob()
       return URL.createObjectURL(blob)
     }
   },
@@ -43,11 +43,11 @@ export default {
   // https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL
   //
   async searchUsers(searchString, max = 50) {
-    let resp = await callGraph(
+    const resp = await callGraph(
       `/users?$filter=startswith(displayName, '${searchString}') or startswith(userPrincipalName, '${searchString}')&$top=${max}`
     )
     if (resp) {
-      let data = await resp.json()
+      const data = await resp.json()
       return data
     }
   },
@@ -72,7 +72,7 @@ async function callGraph(apiPath) {
   // Safe to call repeatedly as MSAL caches tokens locally
   accessToken = await auth.acquireToken(GRAPH_SCOPES)
 
-  let resp = await fetch(`${GRAPH_BASE}${apiPath}`, {
+  const resp = await fetch(`${GRAPH_BASE}${apiPath}`, {
     headers: { authorization: `bearer ${accessToken}` }
   })
 

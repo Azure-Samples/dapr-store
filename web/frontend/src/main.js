@@ -27,12 +27,13 @@ appStartup()
 async function appStartup() {
   // Take local defaults from .env.development or .env.development.local
   // Or fall back to internal defaults
-  let API_ENDPOINT = process.env.VUE_APP_API_ENDPOINT || '/'
-  let AUTH_CLIENT_ID = process.env.VUE_APP_AUTH_CLIENT_ID || ''
+
+  let API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || '/'
+  let AUTH_CLIENT_ID = import.meta.env.VITE_AUTH_CLIENT_ID || ''
 
   // Load config at runtime from special `/config` endpoint on frontend-host
   try {
-    let configResp = await fetch('/config')
+    const configResp = await fetch('/config')
     if (configResp.ok) {
       const config = await configResp.json()
       API_ENDPOINT = config.API_ENDPOINT

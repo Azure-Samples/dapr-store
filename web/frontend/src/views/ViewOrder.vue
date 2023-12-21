@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import ErrorBox from '../components/ErrorBox'
+import Order from '../components/Order.vue'
+import ErrorBox from '../components/ErrorBox.vue'
 import api from '../services/api'
-import Order from '../components/Order'
 var timerId = null
 
 export default {

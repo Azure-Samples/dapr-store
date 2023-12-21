@@ -51,7 +51,7 @@ Note. If running a services directly from their own directory i.e. `cmd/cart/` t
 
 [MSAL.js for browser](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser) is used to provide authentication to the web app frontend
 
-To enable auth, when working locally - create the following file `web/frontend/.env.development.local` and set `VUE_APP_AUTH_CLIENT_ID` with your client id. Note the `VUE_APP_` prefix, this is important.
+To enable auth, when working locally - create the following file `web/frontend/.env.development.local` and set `VITE_AUTH_CLIENT_ID` with your client id. Note the `VITE_` prefix, this is important.
 
 When served from the frontend-host, the frontend will try to fetch it's configuration from the `/config` endpoint and try to get `AUTH_CLIENT_ID` this way. This allows dynamic configuration of the auth feature at runtime.
 
@@ -60,7 +60,7 @@ When `AUTH_CLIENT_ID` is set the application behavior changes as follows:
 - Login page allows users to register, and sign-in with real user accounts in Azure AD.
 - If a user is signed-in, an access token is acquired via the auth service, and used for all API calls made by the frontend to the backend Dapr Store APIs. This token is requested for the scope `store-api`. The fetched access token is then added to the Authorization header of all API calls.
 
-In both cases if `AUTH_CLIENT_ID` is not found at `/config` or if `VUE_APP_AUTH_CLIENT_ID` is not set locally - then the app falls back into "demo user mode" with a fake user account in the frontend.
+In both cases if `AUTH_CLIENT_ID` is not found at `/config` or if `VITE_AUTH_CLIENT_ID` is not set locally - then the app falls back into "demo user mode" with a fake user account in the frontend.
 
 # Services & Token Validation
 

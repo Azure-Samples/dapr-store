@@ -19,8 +19,8 @@
 
 <script>
 import api from '../services/api'
-import ProductList from '../components/ProductList'
-import ErrorBox from '../components/ErrorBox'
+import ProductList from '../components/ProductList.vue'
+import ErrorBox from '../components/ErrorBox.vue'
 
 export default {
   name: 'ProductSearch',

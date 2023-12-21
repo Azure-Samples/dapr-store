@@ -61,7 +61,7 @@
 <script>
 import api from '../services/api'
 import auth from '../services/auth'
-import ErrorBox from '../components/ErrorBox'
+import ErrorBox from '../components/ErrorBox.vue'
 
 import { Toast } from 'bootstrap/dist/js/bootstrap.min.js'
 let toast

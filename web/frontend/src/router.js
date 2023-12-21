@@ -9,16 +9,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import auth from './services/auth'
 
-import ProductCatalog from './views/ProductCatalog'
-import ProductOffers from './views/ProductOffers'
-import ProductSearch from './views/ProductSearch'
-import ProductSingle from './views/ProductSingle'
-import ViewOrder from './views/ViewOrder'
-import Login from './views/Login'
-import Account from './views/Account'
-import Home from './views/Home'
-import About from './views/About'
-import Cart from './views/Cart'
+import ProductCatalog from './views/ProductCatalog.vue'
+import ProductOffers from './views/ProductOffers.vue'
+import ProductSearch from './views/ProductSearch.vue'
+import ProductSingle from './views/ProductSingle.vue'
+import ViewOrder from './views/ViewOrder.vue'
+import Login from './views/Login.vue'
+import Account from './views/Account.vue'
+import Home from './views/Home.vue'
+import About from './views/About.vue'
+import Cart from './views/Cart.vue'
 
 const router = createRouter({
   history: createWebHistory(),

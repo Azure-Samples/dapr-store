@@ -1,0 +1,68 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProductCatalog.vue > renders products in catalog 1`] = `
+"<div>
+  <h1>All Products</h1>
+  <!--v-if-->
+  <div data-v-32d040e6="">
+    <!--v-if-->
+    <!--v-if-->
+    <div data-v-32d040e6="" class="card">
+      <div data-v-32d040e6="" class="card-body">
+        <div data-v-32d040e6="" class="row">
+          <div data-v-32d040e6="" class="col"><a data-v-32d040e6="" href="/product/prd1" class="">
+              <div data-v-32d040e6="" class="card-title">Top Hat (6″)</div>
+            </a>
+            <div data-v-32d040e6="" class="card-text">Made from 100% wool and quite nice <h4 data-v-32d040e6="" class="mt-4">£39.95</h4>
+            </div><button data-v-32d040e6="" disabled="" href="#" class="btn btn-primary d-none d-md-inline"><i data-v-32d040e6="" class="fa-solid fa-basket-shopping"></i> &nbsp; Add to Cart </button>
+          </div>
+          <div data-v-32d040e6="" class="col flex-grow-0 d-none d-md-block">
+            <div data-v-32d040e6="" class="product-img">
+              <!--v-if--><a data-v-32d040e6="" href="/product/prd1" class=""><img data-v-32d040e6="" src="/img/catalog/1.jpg"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-v-32d040e6="" class="card">
+      <div data-v-32d040e6="" class="card-body">
+        <div data-v-32d040e6="" class="row">
+          <div data-v-32d040e6="" class="col"><a data-v-32d040e6="" href="/product/prd2" class="">
+              <div data-v-32d040e6="" class="card-title">Black &amp; Gold Tie Set</div>
+            </a>
+            <div data-v-32d040e6="" class="card-text">100% hand made silk includes tie, pocket square and cufflinks <h4 data-v-32d040e6="" class="mt-4">£18</h4>
+            </div><button data-v-32d040e6="" disabled="" href="#" class="btn btn-primary d-none d-md-inline"><i data-v-32d040e6="" class="fa-solid fa-basket-shopping"></i> &nbsp; Add to Cart </button>
+          </div>
+          <div data-v-32d040e6="" class="col flex-grow-0 d-none d-md-block">
+            <div data-v-32d040e6="" class="product-img"><span data-v-32d040e6="" class="onsale">On Sale</span><a data-v-32d040e6="" href="/product/prd2" class=""><img data-v-32d040e6="" src="/img/catalog/2.jpg"></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-v-32d040e6="" class="card">
+      <div data-v-32d040e6="" class="card-body">
+        <div data-v-32d040e6="" class="row">
+          <div data-v-32d040e6="" class="col"><a data-v-32d040e6="" href="/product/prd3" class="">
+              <div data-v-32d040e6="" class="card-title">Paisley Cravat Ascot Tie</div>
+            </a>
+            <div data-v-32d040e6="" class="card-text">Black &amp; Red Paisley Cravat <h4 data-v-32d040e6="" class="mt-4">£11.2</h4>
+            </div><button data-v-32d040e6="" disabled="" href="#" class="btn btn-primary d-none d-md-inline"><i data-v-32d040e6="" class="fa-solid fa-basket-shopping"></i> &nbsp; Add to Cart </button>
+          </div>
+          <div data-v-32d040e6="" class="col flex-grow-0 d-none d-md-block">
+            <div data-v-32d040e6="" class="product-img">
+              <!--v-if--><a data-v-32d040e6="" href="/product/prd3" class=""><img data-v-32d040e6="" src="/img/catalog/3.jpg"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-v-32d040e6="" class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 11;">
+      <div data-v-32d040e6="" class="toast hide" role="alert">
+        <div data-v-32d040e6="" class="d-flex">
+          <div data-v-32d040e6="" class="toast-body fs-4"> was added to your cart!</div><button data-v-32d040e6="" type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

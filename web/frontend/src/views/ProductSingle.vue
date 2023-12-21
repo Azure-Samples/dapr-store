@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import ErrorBox from '../components/ErrorBox'
+import ErrorBox from '../components/ErrorBox.vue'
 import api from '../services/api'
 import auth from '../services/auth'
 

@@ -1,9 +1,10 @@
-import { mount } from '@vue/test-utils'
-import flushPromises from 'flush-promises'
-import ProductSearch from '@/views/ProductSearch.vue'
+import { describe, it, vi, expect } from 'vitest'
+import { mount, flushPromises } from '@vue/test-utils'
 import router from '@/router'
 
-jest.mock('@/services/api')
+import ProductSearch from '@/views/ProductSearch.vue'
+
+vi.mock('@/services/api')
 
 describe('ProductSearch.vue', () => {
   it('renders search for Ascot', async () => {
@@ -17,6 +18,6 @@ describe('ProductSearch.vue', () => {
     })
 
     await flushPromises()
-    expect(wrapper.html()).toMatch('Ascot')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

@@ -1,0 +1,50 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Account.vue > renders user profile 1`] = `
+"<div data-v-48d1de81="">
+  <!--v-if-->
+  <div data-v-48d1de81="" class="d-flex justify-content-between mb-2">
+    <h1 data-v-48d1de81="">User Account</h1><button data-v-48d1de81="" class="btn btn-danger" style="height: 3rem;"><i data-v-48d1de81="" class="fa-solid fa-right-from-bracket"></i> &nbsp; LOGOUT</button>
+  </div>
+  <!--v-if-->
+  <div data-v-48d1de81="" class="card mb-5">
+    <div data-v-48d1de81="" class="card-body">
+      <div data-v-48d1de81="" class="d-flex justify-content-between mb-2">
+        <table data-v-48d1de81="" class="details">
+          <tr data-v-48d1de81="">
+            <td data-v-48d1de81="">Display Name</td>
+            <td data-v-48d1de81="">Mock User</td>
+          </tr>
+          <tr data-v-48d1de81="">
+            <td data-v-48d1de81="">Username</td>
+            <td data-v-48d1de81="">demo@example.net</td>
+          </tr>
+          <tr data-v-48d1de81="">
+            <td data-v-48d1de81="">Environment</td>
+            <td data-v-48d1de81="">Fake</td>
+          </tr>
+        </table><img data-v-48d1de81="" class="profile d-md-block" src="img/placeholder-profile.jpg">
+      </div>
+    </div>
+  </div>
+  <div data-v-48d1de81="" class="d-flex justify-content-between">
+    <h1 data-v-48d1de81="">Orders</h1>
+    <div data-v-48d1de81="" class="btn btn-success" style="height: 3rem;"><i data-v-48d1de81="" class="fa-solid fa-rotate"></i> &nbsp; Refresh</div>
+  </div>
+  <!--v-if-->
+  <div data-v-f415f84a="" data-v-48d1de81="" class="card order p-4">
+    <div data-v-f415f84a="" class="d-flex justify-content-between mb-2">
+      <h2 data-v-f415f84a="">Mock order</h2><a data-v-f415f84a="" href="/order/ord-mock" class="btn btn-primary"><i data-v-f415f84a="" class="fa-solid fa-list-check"></i> &nbsp; ORDER DETAILS </a>
+    </div>
+    <h2 data-v-f415f84a=""> Status: <span data-v-f415f84a="" class="text-capitalize order-status order-new">new</span></h2>
+    <ul data-v-f415f84a="">
+      <li data-v-f415f84a="">Order Id: ord-mock</li>
+      <li data-v-f415f84a="">Amount: £22.4</li>
+      <li data-v-f415f84a="">Items:</li>
+      <ul data-v-f415f84a="">
+        <li data-v-f415f84a="">2 x Paisley Cravat Ascot Tie — £11.2</li>
+      </ul>
+    </ul>
+  </div>
+</div>"
+`;

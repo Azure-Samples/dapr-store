@@ -65,7 +65,7 @@
 <script>
 import api from '../services/api'
 import auth from '../services/auth'
-import ErrorBox from '../components/ErrorBox'
+import ErrorBox from '../components/ErrorBox.vue'
 
 export default {
   name: 'Login',
@@ -95,7 +95,7 @@ export default {
         await auth.login()
         const user = auth.user()
 
-        let resp = await api.userRegister({
+        const resp = await api.userRegister({
           userId: user.localAccountId,
           email: user.username,
           displayName: user.name || 'Unknown Name',

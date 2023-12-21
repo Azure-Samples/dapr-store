@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ErrorBox.vue > renders properly 1`] = `
+"<div data-v-0e4d1e67="" class="alert alert-danger" show="">
+  <h4 data-v-0e4d1e67="">There was a problem 😥</h4>
+  <div data-v-0e4d1e67="" class="errmsg">Really bad thing just happened</div>
+</div>"
+`;

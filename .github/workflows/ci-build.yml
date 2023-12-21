@@ -12,7 +12,7 @@ on:
     branches: [main]
 
 env:
-  VERSION: 0.8.4
+  VERSION: 0.8.5
   BUILD_INFO: "Build:development / Workflow:${{ github.workflow }} / RunId:${{ github.run_id }} / Ref:${{ github.ref }} / SHA:${{ github.sha }} / ImageTag:${{ github.run_id }}"
   IMAGE_REG: ghcr.io
   IMAGE_TAG: ${{ github.run_id }}

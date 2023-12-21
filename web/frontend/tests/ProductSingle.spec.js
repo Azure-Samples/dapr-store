@@ -1,10 +1,11 @@
-import { mount } from '@vue/test-utils'
-import flushPromises from 'flush-promises'
-import ProductSingle from '@/views/ProductSingle.vue'
+import { describe, it, vi, expect } from 'vitest'
+import { mount, flushPromises } from '@vue/test-utils'
 import router from '@/router'
 
+import ProductSingle from '@/views/ProductSingle.vue'
+
 const productId = 'prd1'
-jest.mock('@/services/api')
+vi.mock('@/services/api')
 
 describe('ProductSingle.vue', () => {
   it('renders product details', async () => {
@@ -18,6 +19,6 @@ describe('ProductSingle.vue', () => {
     })
 
     await flushPromises()
-    expect(wrapper.html()).toMatch('Top&nbsp;Hat')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

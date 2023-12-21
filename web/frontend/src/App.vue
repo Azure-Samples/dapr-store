@@ -43,13 +43,14 @@
 
 <script>
 import auth from './services/auth'
+import packageJson from '../package.json'
 
 export default {
   name: 'App',
 
   data() {
     return {
-      version: require('../package.json').version,
+      version: packageJson.version,
       query: '',
       user: {}
     }
