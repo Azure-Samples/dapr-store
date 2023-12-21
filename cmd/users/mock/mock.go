@@ -11,8 +11,8 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/benc-uk/dapr-store/cmd/users/impl"
-	"github.com/benc-uk/dapr-store/cmd/users/spec"
+	"github.com/azure-samples/dapr-store/cmd/users/impl"
+	"github.com/azure-samples/dapr-store/cmd/users/spec"
 )
 
 // UserService mock

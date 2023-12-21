@@ -14,9 +14,9 @@ import (
 	"math/rand"
 	"time"
 
-	cartspec "github.com/benc-uk/dapr-store/cmd/cart/spec"
-	orderspec "github.com/benc-uk/dapr-store/cmd/orders/spec"
-	productspec "github.com/benc-uk/dapr-store/cmd/products/spec"
+	cartspec "github.com/azure-samples/dapr-store/cmd/cart/spec"
+	orderspec "github.com/azure-samples/dapr-store/cmd/orders/spec"
+	productspec "github.com/azure-samples/dapr-store/cmd/products/spec"
 
 	"github.com/benc-uk/go-rest-api/pkg/env"
 	dapr "github.com/dapr/go-sdk/client"
@@ -188,7 +188,7 @@ func makeID(length int) string {
 	id := ""
 	possible := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
-	rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	for i := 0; i < length; i++ {
 		id += string(possible[rand.Intn(len(possible)-1)])

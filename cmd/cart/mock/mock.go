@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/benc-uk/dapr-store/cmd/cart/impl"
-	cartspec "github.com/benc-uk/dapr-store/cmd/cart/spec"
-	orderspec "github.com/benc-uk/dapr-store/cmd/orders/spec"
+	"github.com/azure-samples/dapr-store/cmd/cart/impl"
+	cartspec "github.com/azure-samples/dapr-store/cmd/cart/spec"
+	orderspec "github.com/azure-samples/dapr-store/cmd/orders/spec"
 )
 
 // CartService mock

@@ -1,24 +1,20 @@
 # =================================================================
 # An opinionated config for linting Go code with golangci-lint
-# See https://golangci-lint.run/usage/linters 
+# See https://golangci-lint.run/usage/linters
 # =================================================================
 
 linters:
   enable:
-    - revive      # Replacement for golint
-    - gofmt       # Runs gofmt as part of the linter
-    #- gosec       # Find security issues
-    - wsl         # Whitespace style enforcer, a matter of taste
-    - stylecheck  # A few Go style rules
-    - nosnakecase # We are not writing Python here
-    - misspell    # Find misspelled words
-    - cyclop      # Find cyclomatic complexity
-    - gocyclo     # Also find cyclomatic complexity
-    - bodyclose   # Check for HTTP body close errors
-    - nilerr      # Find bad nil/err handling
-    - nilnil      # Also find bad nil/err handling
-    #- tagliatelle # Find badly named struct tags
-    #- gomnd       # Find magic numbers, enable at your peril
+    - revive # Replacement for golint
+    - gofmt # Runs gofmt as part of the linter
+    - wsl # Whitespace style enforcer, a matter of taste
+    - stylecheck # A few Go style rules
+    - misspell # Find misspelled words
+    - cyclop # Find cyclomatic complexity
+    - gocyclo # Also find cyclomatic complexity
+    - bodyclose # Check for HTTP body close errors
+    - nilerr # Find bad nil/err handling
+    - nilnil # Also find bad nil/err handling
 
 linters-settings:
   misspell:
@@ -33,7 +29,7 @@ linters-settings:
         yaml: goCamel
 
   revive:
-    severity: error 
+    severity: error
     enable-all-rules: false
     confidence: 0.5
     rules:

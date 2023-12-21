@@ -10,7 +10,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/benc-uk/dapr-store/cmd/orders/impl"
+	"github.com/azure-samples/dapr-store/cmd/orders/impl"
 	"github.com/benc-uk/go-rest-api/pkg/auth"
 	"github.com/benc-uk/go-rest-api/pkg/problem"
 	"github.com/go-chi/chi/v5"

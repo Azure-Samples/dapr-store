@@ -13,8 +13,8 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/benc-uk/dapr-store/cmd/products/impl"
-	"github.com/benc-uk/dapr-store/cmd/products/spec"
+	"github.com/azure-samples/dapr-store/cmd/products/impl"
+	"github.com/azure-samples/dapr-store/cmd/products/spec"
 
 	"github.com/benc-uk/go-rest-api/pkg/api"
 	"github.com/benc-uk/go-rest-api/pkg/env"

@@ -1,4 +1,0 @@
-{
-  "eslint.workingDirectories": ["./web/frontend"],
-  "go.lintTool": "golangci-lint"
-}

@@ -1,6 +1,6 @@
 package spec
 
-import "github.com/benc-uk/dapr-store/cmd/orders/spec"
+import "github.com/azure-samples/dapr-store/cmd/orders/spec"
 
 // Cart holds a users shopping cart
 type Cart struct {

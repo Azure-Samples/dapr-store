@@ -1,12 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://raw.githubusercontent.com/benc-uk/dapr-store/master/cmd/cart/spec/schema.json",
+  "$id": "https://raw.githubusercontent.com/azure-samples/dapr-store/master/cmd/cart/spec/schema.json",
   "type": "object",
   "title": "Cart entity",
-  "required": [
-    "products",
-    "forUser"
-  ],
+  "required": ["products", "forUser"],
   "properties": {
     "products": {
       "$id": "#/properties/products",

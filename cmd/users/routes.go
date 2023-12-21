@@ -13,8 +13,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/benc-uk/dapr-store/cmd/users/impl"
-	"github.com/benc-uk/dapr-store/cmd/users/spec"
+	"github.com/azure-samples/dapr-store/cmd/users/impl"
+	"github.com/azure-samples/dapr-store/cmd/users/spec"
 	"github.com/benc-uk/go-rest-api/pkg/auth"
 	"github.com/benc-uk/go-rest-api/pkg/problem"
 	"github.com/go-chi/chi/v5"

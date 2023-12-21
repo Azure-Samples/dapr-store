@@ -13,7 +13,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/benc-uk/dapr-store/cmd/products/spec"
+	"github.com/azure-samples/dapr-store/cmd/products/spec"
 )
 
 // ProductService is a Dapr based implementation of ProductService interface

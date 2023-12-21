@@ -26,17 +26,15 @@ The application uses the following [Dapr Building Blocks](https://docs.dapr.io/d
 
 # Project Status
 
-![](https://img.shields.io/github/last-commit/benc-uk/dapr-store) ![](https://img.shields.io/github/release-date/benc-uk/dapr-store) ![](https://img.shields.io/github/v/release/benc-uk/dapr-store) ![](https://img.shields.io/github/commit-activity/m/benc-uk/dapr-store)
+![](https://img.shields.io/github/last-commit/azure-samples/dapr-store) ![](https://img.shields.io/github/release-date/azure-samples/dapr-store) ![](https://img.shields.io/github/v/release/azure-samples/dapr-store) ![](https://img.shields.io/github/commit-activity/m/azure-samples/dapr-store)
 
-Deployed instance: https://daprstore.kube.benco.io/  
-[![](https://img.shields.io/website?label=Hosted%3A%20Kubernetes&up_message=online&url=https%3A%2F%2Fdaprstore.kube.benco.io%2F)](https://daprstore.kube.benco.io/)
 
 # Application Elements & Services
 
 The main elements and microservices that make up the Dapr Store system are described here
 
-Each service uses the [Go REST API Starter Kit & Library](https://github.com/benc-uk/go-rest-api) as a starting basis, lots of the boilerplate and 
-repeated code is located there.
+Each service uses the [Go REST API Starter Kit & Library](https://github.com/benc-uk/go-rest-api) as a starting basis. Most of the boilerplate and 
+base code for handling requests and generally acting as a RESTful HTTP endpoint is handled by this package.
 
 ## Service Code
 
@@ -191,22 +189,29 @@ This is a (very) basic guide to running Dapr Store locally. Only instructions fo
 ### Prereqs
 
 - Docker
-- Go v1.18+
-- Node.js v14+
+- GCC for CGO & go-sqlite3 (apt-get install build-essential)
+- Go v1.20+
+- Node.js v18+
 
 ### Setup
 
 Install and initialize Dapr
 
-```
+```bash
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
 dapr init
+```
+
+First time only, you will need to setup *go-sqlite3* library
+
+```bash
+CGO_ENABLED=1 go install github.com/mattn/go-sqlite3
 ```
 
 ### Clone repo
 
 ```bash
-git clone https://github.com/benc-uk/dapr-store/
+git clone https://github.com/azure-samples/dapr-store/
 ```
 
 ### Run all services
@@ -219,7 +224,7 @@ make run
 
 Access the store from http://localhost:9000/
 
-**💣 Gotcha!** The Vue frontend will start and display a message "App running at" saying it is running on port 8000, **do not access the frontend directly on this port, it will not function!**, always go via the gateway running on port 9000
+**💣 GOTCHA!** The Vue frontend will start and display a message "App running at" saying it is running on port 8000, **do not access the frontend directly on this port, it will not function!**, always go via the gateway running on port 9000
 
 # Working Locally
 
@@ -245,36 +250,36 @@ stop                 ⛔ Stop & kill everything started locally from `make run`
 
 A set of CI and CD release GitHub Actions workflows are included in `.github/workflows/`, automated builds are run in GitHub hosted runners
 
-### [GitHub Actions](https://github.com/benc-uk/dapr-store/actions)
+### [GitHub Actions](https://github.com/azure-samples/dapr-store/actions)
 
-[![](https://img.shields.io/github/workflow/status/benc-uk/dapr-store/CI%20Build%20App/master?label=CI+Build+App)](https://github.com/benc-uk/dapr-store/actions/workflows/ci-build.yml)
+[![](https://img.shields.io/github/workflow/status/azure-samples/dapr-store/CI%20Build%20App/master?label=CI+Build+App)](https://github.com/azure-samples/dapr-store/actions/workflows/ci-build.yml)
 
-[![](https://img.shields.io/github/workflow/status/benc-uk/dapr-store/Deploy%20To%20Kubernetes/master?label=Deploy+to+Kubernetes)](https://github.com/benc-uk/dapr-store/actions/workflows/deploy-k8s.yaml)
+[![](https://img.shields.io/github/workflow/status/azure-samples/dapr-store/Deploy%20To%20Kubernetes/master?label=Deploy+to+Kubernetes)](https://github.com/azure-samples/dapr-store/actions/workflows/deploy-k8s.yaml)
 
 # Security, Identity & Authentication
 
-The default mode of operation for the Dapr Store is in "demo mode" where there is no identity provided configured, and no security on the APIs. This makes it simple to run and allows us to focus on the Dapr aspects of the project. In this mode a demo/dummy user account can be used to sign-in and place orders in the store.
+The default mode of operation for the Dapr Store is in "demo mode" where there is no identity provider configured, and no security enforcement on the APIs. This makes it simple to run and allows us to focus on the Dapr aspects of the project. In this mode a demo/dummy user account is used to sign-in and place orders in the store.
 
-Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/) (aka Azure Active Directory v2) as an identity provider, to enable real user sign-in, and securing of the APIs.
+Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/) (aka Microsoft Entra ID) as an identity provider. This then supports real user sign-in, and securing of the APIs.
 
-#### [📃 SUB-SECTION: Full details on security, identity & authentication](./docs/auth-identity/)
+#### [📃 SECTION: Full details on security, identity & authentication](./docs/auth-identity/)
 
 # Configuration
 
 ## Environmental Variables
 
-The services support the following environmental variables. All settings are optional with default values.
+All services support the following environmental variables. All settings are optional with default values.
 
 - `PORT` - Port the server will listen on. See defaults below.
 - `AUTH_CLIENT_ID` - Used to enable integration with Azure AD for identity and authentication. Default is _blank_, which runs the service with no identity backend. See the [security, identity & authentication docs](#security-identity--authentication) for more details.
 - `DAPR_STORE_NAME` - Name of the Dapr state component to use. Default is `statestore`
 
-The following vars are used only by the Cart and Orders services:
+The following vars are used only by the *Cart* and *Orders* services:
 
 - `DAPR_ORDERS_TOPIC` - Name of the Dapr pub/sub topic to use for orders. Default is `orders-queue`
 - `DAPR_PUBSUB_NAME` - Name of the Dapr pub/sub component to use for orders. Default is `pubsub`
 
-The following vars are only used by the Orders service:
+The following vars are only used by the *Orders* service:
 
 - `DAPR_EMAIL_NAME` - Name of the Dapr SendGrid component to use for sending order emails. Default is `orders-email`
 - `DAPR_REPORT_NAME` - Name of the Dapr Azure Blob component to use for saving order reports. Default is `orders-report`
@@ -295,11 +300,7 @@ Frontend host config:
 
 ## Dapr Components
 
-#### [📃 SUB-SECTION: Details of the Dapr components used by the application and how to configure them.](components/)
-
-# Roadmap & known issues
-
-See [project plan on GitHub](https://github.com/benc-uk/dapr-store/projects/1)
+#### [📃 SECTION: Details of the Dapr components used by the application and how to configure them.](components/)
 
 # Concepts and Terms
 
