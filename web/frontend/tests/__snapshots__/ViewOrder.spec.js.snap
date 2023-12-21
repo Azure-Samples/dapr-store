@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ViewOrder.vue > shows order details 1`] = `
+"<div>
+  <div class="d-flex justify-content-between mb-2">
+    <h1>View Order Status</h1>
+    <!--button class="btn btn-lg btn-success" @click="loadOrder()"><i class="fa-solid fa-rotate"></i> &nbsp; Refresh</button-->
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+  <div data-v-f415f84a="" class="card order p-4">
+    <div data-v-f415f84a="" class="d-flex justify-content-between mb-2">
+      <h2 data-v-f415f84a="">Mock order</h2>
+      <!--v-if-->
+    </div>
+    <h2 data-v-f415f84a=""> Status: <span data-v-f415f84a="" class="text-capitalize order-status order-new">new</span></h2>
+    <ul data-v-f415f84a="">
+      <li data-v-f415f84a="">Order Id: ord-mock</li>
+      <li data-v-f415f84a="">Amount: £22.4</li>
+      <li data-v-f415f84a="">Items:</li>
+      <ul data-v-f415f84a="">
+        <li data-v-f415f84a="">2 x Paisley Cravat Ascot Tie — £11.2</li>
+      </ul>
+    </ul>
+  </div>
+</div>"
+`;

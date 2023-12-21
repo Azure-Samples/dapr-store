@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import ErrorBox from '../components/ErrorBox'
+import ErrorBox from '../components/ErrorBox.vue'
 import api from '../services/api'
 import auth from '../services/auth'
 
@@ -89,8 +89,8 @@ export default {
   computed: {
     total() {
       let tot = 0
-      for (let product of this.cartProducts) {
-        let count = this.cart.products[product.id]
+      for (const product of this.cartProducts) {
+        const count = this.cart.products[product.id]
         tot += count * product.cost
       }
 
@@ -105,11 +105,11 @@ export default {
         return
       }
 
-      let resp = await api.cartGet(this.user.localAccountId)
+      const resp = await api.cartGet(this.user.localAccountId)
       if (resp) {
         this.cart = resp
         this.cartProducts = []
-        for (let productId in this.cart.products) {
+        for (const productId in this.cart.products) {
           // Do this async helps speed it up when running locally, due to Dapr bug
           api.productGet(productId).then((resp) => {
             this.cartProducts.push(resp)
@@ -134,7 +134,7 @@ export default {
 
     async clearCart() {
       try {
-        let resp = await api.cartClear(this.user.localAccountId)
+        const resp = await api.cartClear(this.user.localAccountId)
         this.cart = resp
         this.cartProducts = []
       } catch (err) {

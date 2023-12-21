@@ -8,17 +8,17 @@
 const fs = require('fs')
 
 // Load mock data, which we put beside the tests
-let mockDataDir = __dirname + '/../../../../../testing/mock-data'
+const mockDataDir = __dirname + '/../../../../../testing/mock-data'
 let mockJson = fs.readFileSync(`${mockDataDir}/carts.json`)
-let mockCarts = JSON.parse(mockJson)
+const mockCarts = JSON.parse(mockJson)
 mockJson = fs.readFileSync(`${mockDataDir}/orders.json`)
-let mockOrders = JSON.parse(mockJson)
+const mockOrders = JSON.parse(mockJson)
 mockJson = fs.readFileSync(`${mockDataDir}/products.json`)
-let mockProducts = JSON.parse(mockJson)
+const mockProducts = JSON.parse(mockJson)
 mockJson = fs.readFileSync(`${mockDataDir}/user-orders.json`)
-let mockUserOrders = JSON.parse(mockJson)
+const mockUserOrders = JSON.parse(mockJson)
 mockJson = fs.readFileSync(`${mockDataDir}/users.json`)
-let mockUsers = JSON.parse(mockJson)
+const mockUsers = JSON.parse(mockJson)
 
 export default {
   productOffers() {

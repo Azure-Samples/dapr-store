@@ -1,7 +1,7 @@
 SERVICE_DIR := cmd
 FRONTEND_DIR := web/frontend
 OUTPUT_DIR := ./output
-VERSION ?= 0.8.4
+VERSION ?= 0.8.5
 BUILD_INFO ?= "Local makefile build"
 DAPR_RUN_LOGLEVEL := warn
 
@@ -28,7 +28,7 @@ lint-fix: $(FRONTEND_DIR)/node_modules  ## 📝 Lint & format, fixes errors and 
 
 test:  ## 🎯 Unit tests for services and snapshot tests for SPA frontend 
 	go test -v -count=1 ./$(SERVICE_DIR)/...
-	@cd $(FRONTEND_DIR); NODE_ENV=test npm run test -- --ci
+	@cd $(FRONTEND_DIR); npm run test:unit
 
 frontend: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
 	cd $(FRONTEND_DIR); npm run build
@@ -46,7 +46,7 @@ clean:  ## 🧹 Clean the project, remove modules, binaries and outputs
 	rm -rf $(SERVICE_DIR)/frontend-host/frontend-host
 
 run:  ## 🚀 Start & run everything locally as processes
-	cd $(FRONTEND_DIR); npm run serve &
+	cd $(FRONTEND_DIR); npm run dev &
 	dapr run --app-id cart     --app-port 9001 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/cart &
 	dapr run --app-id products --app-port 9002 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/products ./cmd/products/sqlite.db &
 	dapr run --app-id users    --app-port 9003 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/users &

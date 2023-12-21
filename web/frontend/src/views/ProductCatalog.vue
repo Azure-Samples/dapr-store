@@ -17,8 +17,8 @@
 
 <script>
 import api from '../services/api'
-import ProductList from '../components/ProductList'
-import ErrorBox from '../components/ErrorBox'
+import ProductList from '../components/ProductList.vue'
+import ErrorBox from '../components/ErrorBox.vue'
 
 export default {
   name: 'ProductCatalog',
@@ -37,7 +37,7 @@ export default {
 
   async mounted() {
     try {
-      let resp = await api.productCatalog()
+      const resp = await api.productCatalog()
       if (resp && typeof resp === 'object') {
         this.products = resp
       } else {

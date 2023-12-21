@@ -180,7 +180,7 @@ See `scripts/local-gateway` for details on how this is done, the `scripts/local-
 
 # Running in Kubernetes - Quick guide
 
-#### [📃 SUB-SECTION: Deployment guide for Kubernetes](./deploy/)
+#### [📃 Extra Doc: Deployment guide for Kubernetes](./deploy/)
 
 # Running Locally - Quick guide
 
@@ -262,7 +262,7 @@ The default mode of operation for the Dapr Store is in "demo mode" where there i
 
 Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/) (aka Microsoft Entra ID) as an identity provider. This then supports real user sign-in, and securing of the APIs.
 
-#### [📃 SECTION: Full details on security, identity & authentication](./docs/auth-identity/)
+#### [📃 Extra Doc: Security, identity & authentication](./docs/auth-identity/)
 
 # Configuration
 
@@ -300,7 +300,7 @@ Frontend host config:
 
 ## Dapr Components
 
-#### [📃 SECTION: Details of the Dapr components used by the application and how to configure them.](components/)
+#### [📃 Extra Doc: Dapr components used and how to configure them.](components/)
 
 # Concepts and Terms
 

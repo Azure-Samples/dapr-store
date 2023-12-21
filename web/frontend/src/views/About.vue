@@ -24,11 +24,13 @@
 </template>
 
 <script>
+import packageJson from '../../package.json'
+
 export default {
   data() {
     return {
-      version: require('../../package.json').version,
-      buildInfo: (process.env.VUE_APP_BUILD_INFO || 'N/A VUE_APP_BUILD_INFO is unset').replace(/\s\/\s/g, '\n')
+      version: packageJson.version,
+      buildInfo: (import.meta.env.VITE_BUILD_INFO || 'N/A VITE_BUILD_INFO is unset').replace(/\s\/\s/g, '\n')
     }
   }
 }

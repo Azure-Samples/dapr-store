@@ -42,12 +42,13 @@ export default {
       // Stub out all the functions we call and return static dummy user where required
       // Use localStorage to simulate MSAL caching and logging out
       msalApp = {
-        config: {
-          auth: {
-            clientId: null
+        getConfiguration() {
+          return {
+            auth: {
+              clientId: null
+            }
           }
         },
-
         loginPopup() {
           localStorage.setItem('dummyAccount', JSON.stringify(dummyUser))
           return new Promise((resolve) => resolve())
@@ -178,11 +179,11 @@ export default {
     try {
       // 1. Try to acquire token silently
       tokenResp = await msalApp.acquireTokenSilent(accessTokenRequest)
-      console.log('### MSAL acquireTokenSilent was successful')
+      console.debug('### MSAL acquireTokenSilent was successful')
     } catch (err) {
       // 2. Silent process might have failed so try via popup
       tokenResp = await msalApp.acquireTokenPopup(accessTokenRequest)
-      console.log('### MSAL acquireTokenPopup was successful')
+      console.debug('### MSAL acquireTokenPopup was successful')
     }
 
     // Just in case check, probably never triggers
@@ -198,8 +199,8 @@ export default {
   //
   clearLocal() {
     if (msalApp) {
-      for (let entry of Object.entries(localStorage)) {
-        let key = entry[0]
+      for (const entry of Object.entries(localStorage)) {
+        const key = entry[0]
         if (key.includes('login.windows')) {
           localStorage.removeItem(key)
         }

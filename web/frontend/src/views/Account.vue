@@ -61,8 +61,8 @@
 import api from '../services/api'
 import auth from '../services/auth'
 import graph from '../services/graph'
-import ErrorBox from '../components/ErrorBox'
-import Order from '../components/Order'
+import ErrorBox from '../components/ErrorBox.vue'
+import Order from '../components/Order.vue'
 
 export default {
   name: 'Account',
@@ -87,10 +87,12 @@ export default {
     try {
       if (auth.user()) {
         this.user = auth.user()
-        let resp = await api.userGet(auth.user().localAccountId)
+        const resp = await api.userGet(auth.user().localAccountId)
+
         if (resp) {
           this.registeredUser = resp
         }
+
         graph.getPhoto().then((photo) => {
           if (photo) {
             this.photo = photo
@@ -129,9 +131,9 @@ export default {
       }
 
       // Load orders call the API to fetch details
-      for (let orderId of orderList.reverse()) {
+      for (const orderId of orderList.reverse()) {
         try {
-          let order = await api.orderGet(orderId)
+          const order = await api.orderGet(orderId)
           this.orders.push(order)
         } catch (err) {
           this.error += err

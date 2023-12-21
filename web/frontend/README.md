@@ -1,49 +1,41 @@
-# Dapr Store Frontend
+# dapr-store-new-vite
 
-Created with Vue CLI
+This template should help get you started developing with Vue 3 in Vite.
 
-## Project setup
+## Recommended IDE Setup
 
-```bash
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compile and Hot-Reload for Development
 
-```bash
-npm run serve
+```sh
+npm run dev
 ```
 
-### Compiles and minifies for production
+### Compile and Minify for Production
 
-```bash
+```sh
 npm run build
 ```
 
-### Lints and fixes files
+### Run Unit Tests with [Vitest](https://vitest.dev/)
 
-```bash
+```sh
+npm run test:unit
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
 npm run lint
 ```
-
-```bash
-npm run lint-fix
-```
-
-### Run unit tests (snapshots)
-
-Against current snapshots
-
-```bash
-npm run test
-```
-
-Update snapshots with
-
-```bash
-npm run test-update
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).

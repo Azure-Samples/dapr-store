@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProductSingle.vue > renders product details 1`] = `
+"<div data-v-fdd171a3="">
+  <h1 data-v-fdd171a3="">Product Details</h1>
+  <!--v-if-->
+  <!--v-if-->
+  <div data-v-fdd171a3="" class="card">
+    <div data-v-fdd171a3="" class="card-body">
+      <div data-v-fdd171a3="" class="row d-flex">
+        <div data-v-fdd171a3="" class="col mb-3">
+          <div data-v-fdd171a3="" class="card-title">Top Hat (6″)</div>
+          <!--v-if-->
+          <div data-v-fdd171a3="" class="m-3">Made from 100% wool and quite nice</div>
+          <h3 data-v-fdd171a3="">£39.95</h3><button data-v-fdd171a3="" id="addBut" class="btn btn-primary" disabled=""><i data-v-fdd171a3="" class="fa-solid fa-basket-shopping"></i> &nbsp; Add to Cart </button>
+        </div>
+        <div data-v-fdd171a3="" class="col">
+          <div data-v-fdd171a3="" class="product-img"><img data-v-fdd171a3="" src="/img/catalog/1.jpg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-v-fdd171a3="" class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 11;">
+    <div data-v-fdd171a3="" class="toast hide" role="alert">
+      <div data-v-fdd171a3="" class="d-flex">
+        <div data-v-fdd171a3="" class="toast-body fs-4">Top Hat (6″) was added to your cart!</div><button data-v-fdd171a3="" type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

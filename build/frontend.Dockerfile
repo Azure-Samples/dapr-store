@@ -28,7 +28,7 @@ FROM node:20-alpine as frontend-build
 ARG VERSION="0.0.1"
 ARG BUILD_INFO="Not provided"
 
-ENV VUE_APP_BUILD_INFO=${BUILD_INFO}
+ENV VITE_BUILD_INFO=${BUILD_INFO}
 WORKDIR /build
 
 # Install all the Vue.js dev tools & CLI, and our app dependencies 
@@ -38,11 +38,13 @@ RUN npm version $VERSION --allow-same-version
 RUN npm install --silent
 
 # Copy in the Vue.js app source
-COPY web/frontend/.eslintrc.js .
+COPY web/frontend/.eslintrc.cjs .
+COPY web/frontend/vite.config.js .
+COPY web/frontend/index.html .
 COPY web/frontend/public ./public
 COPY web/frontend/src ./src
 
-# Now main Vue CLI build & bundle, this will output to ./dist
+# Now build & bundle, this will output to ./dist
 RUN npm run build
 
 # ================================================================================================

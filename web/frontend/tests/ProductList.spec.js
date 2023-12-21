@@ -1,13 +1,14 @@
-import { mount } from '@vue/test-utils'
-import flushPromises from 'flush-promises'
+import { vi, describe, it, expect } from 'vitest'
+import { mount, flushPromises } from '@vue/test-utils'
 import router from '@/router'
+
 import ProductList from '@/components/ProductList.vue'
 
-jest.mock('@/services/api')
+vi.mock('@/services/api')
 
 // Load mock data
-let mockJson = require('fs').readFileSync(__dirname + '/../../../../testing/mock-data/products.json')
-let mockProducts = JSON.parse(mockJson)
+const mockJson = require('fs').readFileSync(__dirname + '/../../../testing/mock-data/products.json')
+const mockProducts = JSON.parse(mockJson)
 
 describe('ProductList.vue', () => {
   it('renders product list', async () => {
@@ -21,6 +22,6 @@ describe('ProductList.vue', () => {
     })
 
     await flushPromises()
-    expect(wrapper.html()).toMatch('Cravat')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

@@ -1,10 +1,11 @@
-import { mount } from '@vue/test-utils'
-import flushPromises from 'flush-promises'
-import ProductSearch from '@/views/ViewOrder.vue'
+import { describe, it, vi, expect } from 'vitest'
+import { mount, flushPromises } from '@vue/test-utils'
 import router from '@/router'
 
-jest.mock('@/services/api')
-jest.mock('@/services/auth')
+import ProductSearch from '@/views/ViewOrder.vue'
+
+vi.mock('@/services/api')
+vi.mock('@/services/auth')
 
 describe('ViewOrder.vue', () => {
   it('shows order details', async () => {
@@ -18,7 +19,6 @@ describe('ViewOrder.vue', () => {
     })
 
     await flushPromises()
-    expect(wrapper.html()).toMatch('ord-mock')
-    expect(wrapper.html()).toMatch('Ascot')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

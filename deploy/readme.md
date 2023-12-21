@@ -5,7 +5,7 @@ This is a brief guide to deploying Dapr Store to Kubernetes.
 Assumptions:
 
 - kubectl is installed, and configured to access your Kubernetes cluster
-- dapr CLI is installed - https://docs.dapr.io/getting-started/install-dapr-cli/
+- Dapr CLI is installed - https://docs.dapr.io/getting-started/install-dapr-cli/
 - helm is installed - https://helm.sh/docs/intro/install/
 
 This guide does not cover more advanced deployment scenarios such as deploying behind a DNS name, or with HTTPS enabled or with used identity enabled.

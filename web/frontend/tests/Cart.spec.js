@@ -1,10 +1,12 @@
+import { describe, it, vi, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import flushPromises from 'flush-promises'
 import router from '@/router'
+import { flushPromises } from '@vue/test-utils'
+
 import Cart from '@/views/Cart.vue'
 
-jest.mock('@/services/api')
-jest.mock('@/services/auth')
+vi.mock('@/services/api')
+vi.mock('@/services/auth')
 
 describe('Cart.vue', () => {
   it('renders cart contents', async () => {
@@ -15,7 +17,6 @@ describe('Cart.vue', () => {
     })
 
     await flushPromises()
-    expect(wrapper.html()).toMatch('Top&nbsp;Hat')
-    expect(wrapper.html()).toMatch('Cravat')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
