@@ -11,6 +11,10 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  packages: write
+
 env:
   VERSION: 0.8.5
   BUILD_INFO: "Build:development / Workflow:${{ github.workflow }} / RunId:${{ github.run_id }} / Ref:${{ github.ref }} / SHA:${{ github.sha }} / ImageTag:${{ github.run_id }}"
