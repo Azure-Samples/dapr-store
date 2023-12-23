@@ -182,6 +182,10 @@ See `scripts/local-gateway` for details on how this is done, the `scripts/local-
 
 #### [📃 Extra Doc: Deployment guide for Kubernetes](./deploy/)
 
+# Running in Azure Container Apps - Quick guide
+
+#### [📃 Extra Doc: Deployment guide for Azure Container Apps](./deploy/container-app/)
+
 # Running Locally - Quick guide
 
 This is a (very) basic guide to running Dapr Store locally. Only instructions for WSL 2/Linux/MacOS are provided. It's advised to only do this if you wish to develop or debug the project.
