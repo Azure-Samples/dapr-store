@@ -5,5 +5,5 @@
 # Wraps nginx-proxy.sh in `dapr run` so that nginx runs Dapr-ized
 #
 
-scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-dapr run --app-id api-gateway --app-port 9000 --log-level warn "$scriptDir"/nginx-proxy.sh --components-path "$scriptDir"/../../components
+scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+dapr run --app-id api-gateway --app-port 9000 --log-level warn "$scriptDir"/nginx-proxy.sh --resources-path "$scriptDir"/../../components

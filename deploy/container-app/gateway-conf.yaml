@@ -1,0 +1,12 @@
+upstreams:
+  - name: frontend
+    host: frontend
+    noHostRewrite: true
+  - name: dapr
+    host: localhost
+    port: 3500
+rules:
+  - upstream: dapr
+    path: /v1.0
+  - upstream: frontend
+    path: /

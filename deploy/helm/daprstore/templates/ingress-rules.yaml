@@ -47,6 +47,7 @@ spec:
             pathType: Prefix
             backend:
               service:
+                # Send to the Dapr sidecar, which exposes the Dapr invoke API
                 name: api-gateway-dapr
                 port: 
                   number: 80                

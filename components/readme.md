@@ -16,7 +16,7 @@ There are two Dapr components required for the app to function:
 - `pubsub.yaml` - Default pub/sub component of type **pubsub.redis**, included here for reference. No configuration required.
 
   - _Running locally_: This should exist by default in your dapr components dir, eg. $HOME/.dapr/components
-  - _Running in Kubernetes_: The daprstore Helm chart should deploy this component for you
+  - _Running in Kubernetes_: The Dapr store Helm chart should deploy this component for you
 
 - `statestore.yaml` - Default state component of type **state.redis**, included here for reference. No configuration required
 
