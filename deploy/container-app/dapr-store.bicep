@@ -1,5 +1,5 @@
 // ============================================================================
-// Deploy a container app with app container environment and log analytics
+// Deploy to Azure using Bicep and Azure Container Apps
 // ============================================================================
 
 targetScope = 'subscription'
@@ -39,12 +39,12 @@ resource resGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 
 module logAnalytics './modules/log-analytics.bicep' = {
   scope: resGroup
-  name: 'logs'
+  name: 'logs-deploy'
 }
 
 module storageAcct 'modules/storage.bicep' = {
   scope: resGroup
-  name: 'storage'
+  name: 'storage-deploy'
   params: {
     name: 'daprstore'
     tableName: daprTableName
@@ -53,7 +53,7 @@ module storageAcct 'modules/storage.bicep' = {
 
 module serviceBus 'modules/service-bus.bicep' = {
   scope: resGroup
-  name: 'service-bus'
+  name: 'service-bus-deploy'
   params: {
     sku: 'Standard'
     topicName: 'orders-queue'
@@ -62,7 +62,7 @@ module serviceBus 'modules/service-bus.bicep' = {
 
 module containerAppEnv './modules/app-env.bicep' = {
   scope: resGroup
-  name: 'app-env'
+  name: 'app-env-deploy'
   params: {
     logAnalyticsName: logAnalytics.outputs.name
     logAnalyticsResGroup: resGroup.name
@@ -73,9 +73,9 @@ module containerAppEnv './modules/app-env.bicep' = {
 
 module daprComponentState './modules/dapr-component.bicep' = {
   scope: resGroup
-  name: 'dapr-component-store'
+  name: 'dapr-store-deploy'
   params: {
-    name: 'statestore'
+    name: 'statestore' // Dont' change this, unless you also change a lot of other things
     environmentName: containerAppEnv.outputs.name
     componentType: 'state.azure.tablestorage'
 
@@ -100,9 +100,9 @@ module daprComponentState './modules/dapr-component.bicep' = {
 
 module daprComponentPubsub './modules/dapr-component.bicep' = {
   scope: resGroup
-  name: 'dapr-component-pubsub'
+  name: 'dapr-pubsub-deploy'
   params: {
-    name: 'pubsub'
+    name: 'pubsub' // Dont' change this, unless you also change a lot of other things
     environmentName: containerAppEnv.outputs.name
     componentType: 'pubsub.azure.servicebus.topics'
 
@@ -230,8 +230,6 @@ module frontendApp './modules/app.bicep' = {
     ingressPort: 8000
   }
 }
-
-// ===== Dapr components ======================================================
 
 // ===== Outputs ==============================================================
 
