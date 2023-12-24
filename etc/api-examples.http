@@ -1,7 +1,11 @@
-#@host = staging.daprstore.benco.io
-#@host = daprstore.kube.benco.io
+# ===================================================================
+# File for the VS Code REST Client extension
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+# Provides a quick way to test & call the API wihout needing Postman
+# ===================================================================
+
 @host = localhost:9000
-@user = {{user}}
+@user = 00000000-1111-2222-3333-abcdef123456
 
 # ===================================================================
 # Products API
@@ -49,7 +53,7 @@ content-type: application/json
 # ===================================================================
 
 ### Get existing order
-GET http://{{host}}/v1.0/invoke/orders/method/get/LsWIO 
+GET http://{{host}}/v1.0/invoke/orders/method/get/qf2ah 
 
 ### Get orders for user
 GET http://{{host}}/v1.0/invoke/orders/method/getForUser/{{user}}

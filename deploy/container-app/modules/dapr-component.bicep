@@ -1,5 +1,5 @@
 // ============================================================================
-// Container App Environment to host container apps
+// Add Dapr Component to existing Container App Environment
 // ============================================================================
 
 @description('Existing Container App Environment')

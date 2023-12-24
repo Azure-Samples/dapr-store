@@ -9,13 +9,33 @@ param location string = resourceGroup().location
 param suffix string = '-${substring(uniqueString(resourceGroup().name), 0, 5)}'
 
 @description('Pick your storage SKU')
+@allowed([
+  'Standard_LRS'
+  'Standard_GRS'
+  'Standard_ZRS'
+  'Standard_RAGRS'
+  'Standard_RAGZRS'
+  'Premium_LRS'
+  'Premium_ZRS'
+])
 param sku string = 'Standard_LRS'
 
 @description('Pick your account kind')
+@allowed([
+  'StorageV2'
+  'Storage'
+  'BlobStorage'
+  'BlockBlobStorage'
+  'FileStorage'
+])
 param kind string = 'StorageV2'
 
-@description('Create a table, leave blank to not create a table')
-param tableName string = ''
+@description('Access tier')
+@allowed([
+  'Hot'
+  'Cool'
+])
+param accessTier string = 'Hot'
 
 // ===== Variables ============================================================
 
@@ -35,18 +55,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 
   properties: {
     supportsHttpsTrafficOnly: true
-    accessTier: 'Hot'
+    accessTier: accessTier
+    allowSharedKeyAccess: true
   }
-}
-
-resource tableService 'Microsoft.Storage/storageAccounts/tableServices@2023-01-01' = if (tableName != '') {
-  name: 'default'
-  parent: storageAccount
-}
-
-resource table 'Microsoft.Storage/storageAccounts/tableServices/tables@2023-01-01' = if (tableName != '') {
-  parent: tableService
-  name: tableName
 }
 
 // ===== Outputs ==============================================================

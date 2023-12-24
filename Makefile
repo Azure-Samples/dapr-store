@@ -5,8 +5,9 @@ VERSION ?= 0.8.5
 BUILD_INFO ?= "Local makefile build"
 DAPR_RUN_LOGLEVEL := warn
 
-# Only change this if you know what you're doing
+# Only change these if testing with different components
 #DAPR_STORE_NAME := statestore-table
+#DAPR_PUBSUB_NAME := pubsub
 
 # Most likely want to override these when calling `make image-all`
 IMAGE_REG ?= ghcr.io

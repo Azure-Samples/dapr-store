@@ -16,6 +16,9 @@ param imageBase string = 'ghcr.io/azure-samples/dapr-store'
 @description('Version of the container image')
 param imageTag string = 'latest'
 
+@description('Enable authentication with Entra ID, by setting a client ID')
+param authClientID string = '7faeb5dc-3110-4e4d-81d6-da6b56b1b955'
+
 // ===== Variables ============================================================
 
 // Using my own benc-uk/nanoproxy-proxy as a simple HTTP proxy for the API gateway
@@ -28,7 +31,7 @@ var imageUsers = '${imageBase}/users:${imageTag}'
 var imageCart = '${imageBase}/cart:${imageTag}'
 var imageFrontend = '${imageBase}/frontend-host:${imageTag}'
 
-var daprTableName = 'daprstate'
+var daprTableName = 'daprstate2222'
 
 // ===== Base shared resources ==================================================
 
@@ -47,7 +50,15 @@ module storageAcct 'modules/storage.bicep' = {
   name: 'storage-deploy'
   params: {
     name: 'daprstore'
-    tableName: daprTableName
+  }
+}
+
+module storageTable 'modules/storage-table.bicep' = {
+  scope: resGroup
+  name: 'storage-table-deploy'
+  params: {
+    name: daprTableName
+    storageAccountName: storageAcct.outputs.name
   }
 }
 
@@ -163,6 +174,13 @@ module productsApp './modules/app.bicep' = {
 
     daprAppId: 'products'
     daprAppPort: 9002
+
+    envs: [
+      {
+        name: 'AUTH_CLIENT_ID'
+        value: authClientID
+      }
+    ]
   }
 }
 
@@ -180,6 +198,13 @@ module ordersApp './modules/app.bicep' = {
 
     daprAppId: 'orders'
     daprAppPort: 9004
+
+    envs: [
+      {
+        name: 'AUTH_CLIENT_ID'
+        value: authClientID
+      }
+    ]
   }
 }
 
@@ -197,6 +222,13 @@ module usersApp './modules/app.bicep' = {
 
     daprAppId: 'users'
     daprAppPort: 9003
+
+    envs: [
+      {
+        name: 'AUTH_CLIENT_ID'
+        value: authClientID
+      }
+    ]
   }
 }
 
@@ -214,6 +246,13 @@ module cartApp './modules/app.bicep' = {
 
     daprAppId: 'cart'
     daprAppPort: 9001
+
+    envs: [
+      {
+        name: 'AUTH_CLIENT_ID'
+        value: authClientID
+      }
+    ]
   }
 }
 
@@ -228,6 +267,13 @@ module frontendApp './modules/app.bicep' = {
 
     ingressExternal: false
     ingressPort: 8000
+
+    envs: [
+      {
+        name: 'AUTH_CLIENT_ID'
+        value: authClientID
+      }
+    ]
   }
 }
 
