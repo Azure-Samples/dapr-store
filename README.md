@@ -4,7 +4,7 @@ Dapr Store is a sample/reference application showcasing the use of [Dapr](https:
 
 [Dapr](https://dapr.io/) is an _"event-driven, portable runtime for building microservices on cloud and edge"_. The intention of this project was to show off many of the capabilities and features of Dapr, but in the context of a real working application. This has influenced the architecture and design decisions, balancing between realism and a simple _"demo-ware"_ showcase.
 
-The backend microservices are written in Go (however it's worth nothing that Dapr is language independent), and the frontend is a single-page application (SPA) written in [Vue.js](https://vuejs.org/). All APIs are REST & HTTP based
+The backend microservices are written in Go (however it's worth noting that Dapr is language, framework and platform independent), and the frontend is a single-page application (SPA) written in [Vue.js](https://vuejs.org/). All APIs are REST & HTTP based
 
 This repo is a monorepo, containing the source for several discreet but closely linked codebases, one for each component of the project, as described below.  
 The ["Go Standard Project Layout"](https://github.com/golang-standards/project-layout) has been used.
@@ -12,14 +12,15 @@ The ["Go Standard Project Layout"](https://github.com/golang-standards/project-l
 # Architecture
 
 The following diagram shows all the components of the application and main interactions. It also highlights which Dapr API/feature (aka Dapr building block) is used and where.
-![architecture diagram](./docs/img/design.png)
+
+![Dapr store Architecture diagram](./docs/img/design.png)
 
 ## Dapr Interfaces & Building Blocks
 
 The application uses the following [Dapr Building Blocks](https://docs.dapr.io/developing-applications/building-blocks/) and APIs
 
 - **Service Invocation** — The API gateway calls the four main microservices using HTTP calls to [Dapr service invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/). This provides retries, mTLS and service discovery.
-- **State** — State is held for users and orders using the [Dapr state management API](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/). The state provider used is Redis, however any other provider could be plugged in without any application code changes.
+- **State** — State is held for *users* and *orders* using the [Dapr state management API](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/). The state provider used is Redis, however any other provider could be plugged in without any application code changes.
 - **Pub/Sub** — The submission of new orders through the cart service, is decoupled from the order processing via pub/sub messaging and the [Dapr pub/sub messaging API](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/). New orders are placed on a topic as messages, to be collected by the orders service. This allows the orders service to independently scale and separates our reads & writes
 - **Output Bindings** — To communicate with downstream & 3rd party systems, the [Dapr Bindings API](https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/) is used. This allows the system to carry out tasks such as saving order details into external storage (e.g. Azure Blob) and notify uses with emails via SendGrid
 - **Middleware** — Dapr supports a range of HTTP middleware, for this project traffic rate limiting can enabled on any of the APIs with a single Kubernetes annotation
@@ -80,7 +81,7 @@ This provides a simple user profile service to the Dapr Store. Only registered u
 It is written in Go, source is in `cmd/users` and it exposes the following API routes:
 
 ```
-/register               POST a new user to register them
+/register               POST a new user, to register & create them
 /get/{userId}           GET the user profile for given user
 /private/get/{userId}   GET the user profile for given user. Private endpoints are NOT exposed through the gateway
 /isregistered/{userId}  GET the registration status for a given user
@@ -122,7 +123,7 @@ It is written in Go, source is in `cmd/cart` and it exposes the following API ro
 ```text
 /setProduct/{userId}/{productId}/{count}    PUT a number of products in the cart of given user
 /get/{userId}                               GET cart for user
-/submit                                       POST submit a cart, and turn it into an 'Order'
+/submit                                     POST submit a cart, and turn it into an 'Order'
 /clear/{userId}                             PUT clear a user's cart
 ```
 
@@ -138,13 +139,13 @@ The service is responsible for maintaining shopping carts for each user and pers
 
 This is the frontend accessed by users of store and visitors to the site. It is a single-page application (SPA) as such it runs entirely client side in the browser. It was created using the [Vue CLI](https://cli.vuejs.org/) and written in Vue.js
 
-It follows the standard SPA pattern of being served via static hosting (the 'frontend host' described below) and all data is fetched via a REST API endpoint. Note. [Vue Router](https://router.vuejs.org/) is used to provide client side routing, as such it needs to be served from a host that is configured to support it.
+It follows the standard SPA pattern of being served via static hosting (the 'frontend host' described below) and all data is fetched from the client browser, via a REST API endpoint. Note. [Vue Router](https://router.vuejs.org/) is used to provide client side routing, as such it needs to be served from a host that is configured to support it.
 
-The default API endpoint is `/` and it makes calls to the Dapr invoke API, namely `/v1.0/invoke/{service}` this is routed via the _API gateway_ to the various services.
+The default API endpoint is `/` and it makes calls to the _API gateway_ to invoke the Dapr invoke API, namely `/v1.0/invoke/{service}` this is routed via Dapr from the _API gateway_ to the various services.
 
 ## 📡 Frontend host
 
-A very standard static content server using gorilla/mux. See https://github.com/gorilla/mux#static-files. It simply serves up the static bundled files output from the build process of the frontend, it expects to find these files in `./dist` directory but this is configurable
+A very standard static content server using the [github.com/benc-uk/go-rest-api SPA handler](https://github.com/benc-uk/go-rest-api/blob/main/pkg/static/spa.go). It simply serves up the static bundled files output from the build process of the frontend, it expects to find these files in `./dist` directory but this is configurable.
 
 In addition it exposes a simple `/config` endpoint, this is to allow dynamic configuration of the frontend. It passes two env vars `AUTH_CLIENT_ID` and `API_ENDPOINT` from the frontend host to the frontend Vue SPA as a JSON response, which are fetched & read as the app is loaded in the browser.
 
