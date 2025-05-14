@@ -49,7 +49,7 @@ clean:  ## 🧹 Clean the project, remove modules, binaries and outputs
 	rm -rf $(SERVICE_DIR)/products/products
 	rm -rf $(SERVICE_DIR)/frontend-host/frontend-host
 
-run:  ## 🚀 Start & run everything locally as processes
+run: $(FRONTEND_DIR)/node_modules ## 🚀 Start & run everything locally as processes
 	cd $(FRONTEND_DIR); npm run dev &
 	dapr run --app-id cart     --app-port 9001 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/cart &
 	dapr run --app-id products --app-port 9002 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/products ./cmd/products/sqlite.db &
