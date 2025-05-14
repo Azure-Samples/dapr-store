@@ -43,9 +43,8 @@ COPY --from=go-build /build/server .
 EXPOSE $SERVICE_PORT
 ENV PORT=$SERVICE_PORT
 
-# This is a trick, we don't really need run.sh
-# But some services might have .db files, some don't
-COPY cmd/$SERVICE_NAME/readme.md cmd/$SERVICE_NAME/*.db ./
+# Needs a recent version of Docker https://stackoverflow.com/a/46801962
+COPY cmd/$SERVICE_NAME/*.db ./
 
 # That's it! Just run the server 
 CMD [ "./server"]
