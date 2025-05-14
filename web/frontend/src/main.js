@@ -40,7 +40,7 @@ async function appStartup() {
       AUTH_CLIENT_ID = config.AUTH_CLIENT_ID
       console.log('### Config loaded:', config)
     }
-  } catch (err) {
+  } catch (_err) {
     console.warn("### Failed to fetch '/config' endpoint. Defaults will be used")
   }
 

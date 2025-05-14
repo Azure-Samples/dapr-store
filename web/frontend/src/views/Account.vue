@@ -24,18 +24,20 @@
       <div class="card-body">
         <div class="d-flex justify-content-between mb-2">
           <table class="details">
-            <tr>
-              <td>Display Name</td>
-              <td>{{ registeredUser.displayName }}</td>
-            </tr>
-            <tr>
-              <td>Username</td>
-              <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-              <td>Environment</td>
-              <td>{{ user.environment }}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>Display Name</td>
+                <td>{{ registeredUser.displayName }}</td>
+              </tr>
+              <tr>
+                <td>Username</td>
+                <td>{{ user.username }}</td>
+              </tr>
+              <tr>
+                <td>Environment</td>
+                <td>{{ user.environment }}</td>
+              </tr>
+            </tbody>
           </table>
           <img class="profile d-md-block" :src="photo" />
         </div>

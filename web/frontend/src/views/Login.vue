@@ -127,7 +127,7 @@ export default {
         if (user && user.localAccountId) {
           try {
             await api.userCheckReg(user.localAccountId)
-          } catch (err) {
+          } catch (_err) {
             auth.clearLocal()
             throw new Error("Sorry, you aren't a registered user, please use the registration option below")
           }
