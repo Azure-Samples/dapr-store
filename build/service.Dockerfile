@@ -1,7 +1,7 @@
 # ===================================================================================
 # === Stage 1: Build the Go service code into 'server' exe ==========================
 # ===================================================================================
-FROM golang:1.21-alpine as go-build
+FROM golang:1.24-alpine AS go-build
 
 ARG SERVICE_NAME="SET_ON_COMMAND_LINE"
 ARG VERSION="0.0.1"
@@ -31,7 +31,7 @@ RUN GO111MODULE=on CGO_ENABLED=$CGO_ENABLED GOOS=linux \
 # ================================================================================================
 # === Stage 2: Get server binary into a lightweight container ====================================
 # ================================================================================================
-FROM alpine:3.19
+FROM alpine:3.21
 WORKDIR /app 
 
 ARG SERVICE_NAME="SET_ON_COMMAND_LINE"
