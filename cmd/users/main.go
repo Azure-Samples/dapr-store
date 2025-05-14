@@ -15,8 +15,8 @@ import (
 
 	"github.com/azure-samples/dapr-store/cmd/users/impl"
 	"github.com/azure-samples/dapr-store/cmd/users/spec"
-	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 
 	"github.com/benc-uk/go-rest-api/pkg/api"
 	"github.com/benc-uk/go-rest-api/pkg/auth"

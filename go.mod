@@ -5,7 +5,6 @@ go 1.21
 require (
 	github.com/benc-uk/go-rest-api v1.0.11
 	github.com/dapr/go-sdk v1.9.1
-	github.com/go-chi/chi v4.1.1+incompatible
 	github.com/go-chi/chi/v5 v5.0.11
 	github.com/joho/godotenv v1.5.1
 	github.com/mattn/go-sqlite3 v1.14.19
@@ -18,6 +17,7 @@ require (
 	github.com/dapr/dapr v1.12.0-rc.4 // indirect
 	github.com/elastic/go-sysinfo v1.11.1 // indirect
 	github.com/elastic/go-windows v1.0.0 // indirect
+	github.com/go-chi/chi v4.1.1+incompatible // indirect
 	github.com/go-chi/cors v1.2.1 // indirect
 	github.com/golang-jwt/jwt/v5 v5.1.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect

@@ -20,8 +20,8 @@ import (
 	"github.com/benc-uk/go-rest-api/pkg/dapr/pubsub"
 	"github.com/benc-uk/go-rest-api/pkg/env"
 	"github.com/benc-uk/go-rest-api/pkg/logging"
-	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 
 	_ "github.com/joho/godotenv/autoload" // Autoloads .env file if it exists
 )

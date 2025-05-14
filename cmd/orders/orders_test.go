@@ -41,6 +41,7 @@ func TestOrders(t *testing.T) {
 
 	t.Run("process empty order", func(t *testing.T) {
 		emptyOrder := spec.Order{}
+
 		err := mockOrdersSvc.ProcessOrder(emptyOrder)
 		if err != nil && strings.Contains(err.Error(), "validation") {
 		} else {
@@ -53,6 +54,7 @@ func TestOrders(t *testing.T) {
 			LineItems: []spec.LineItem{},
 			ForUserID: "",
 		}
+
 		err := mockOrdersSvc.ProcessOrder(badOrder)
 		if err != nil && strings.Contains(err.Error(), "validation") {
 		} else {
@@ -62,6 +64,7 @@ func TestOrders(t *testing.T) {
 
 	t.Run("process valid new order", func(t *testing.T) {
 		goodOrder := mock.MockOrders[0]
+
 		err := mockOrdersSvc.ProcessOrder(goodOrder)
 		if err != nil {
 			t.Errorf("'process valid new order' failed %+v", err)
@@ -81,6 +84,7 @@ func TestOrders(t *testing.T) {
 
 	t.Run("order processing completed", func(t *testing.T) {
 		time.Sleep(time.Second * 3)
+
 		newOrder, err := mockOrdersSvc.GetOrder("ord-mock")
 		if err != nil {
 			t.Errorf("'order processing completed' failed: %+v", err)
