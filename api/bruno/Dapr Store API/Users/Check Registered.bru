@@ -1,0 +1,16 @@
+meta {
+  name: Check Registered
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{endpoint}}/users/method/isregistered/{{newUserId}}
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 204
+  res.body: isEmpty
+}

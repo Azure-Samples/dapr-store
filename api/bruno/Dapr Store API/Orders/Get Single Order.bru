@@ -1,0 +1,18 @@
+meta {
+  name: Get Single Order
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{endpoint}}/orders/method/get/{{orderId}}
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body: isJson
+  res.body.id: eq {{orderId}}
+  res.body.lineItems: isArray
+}

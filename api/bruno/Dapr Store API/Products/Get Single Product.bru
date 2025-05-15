@@ -1,0 +1,17 @@
+meta {
+  name: Get Single Product
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{endpoint}}/products/method/get/prd003
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body.id: eq prd003
+  res.body: isJson
+}

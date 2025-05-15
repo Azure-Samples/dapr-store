@@ -1,0 +1,17 @@
+meta {
+  name: Search Products
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{endpoint}}/products/method/search/Paisley
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body[0].name: contains Paisley
+  res.body: isArray
+}

@@ -1,0 +1,17 @@
+meta {
+  name: Get User
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{endpoint}}/users/method/get/{{newUserId}}
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body.email: isString
+  res.body.displayName: isNotEmpty
+}

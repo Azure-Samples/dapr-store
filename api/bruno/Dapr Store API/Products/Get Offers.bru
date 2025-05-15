@@ -1,0 +1,17 @@
+meta {
+  name: Get Offers
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{endpoint}}/products/method/offers
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body[0].onOffer: eq true
+  res.body: isArray
+}

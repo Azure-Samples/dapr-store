@@ -1,0 +1,27 @@
+meta {
+  name: Submit
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{endpoint}}/cart/method/submit
+  body: text
+  auth: inherit
+}
+
+body:text {
+  "{{userId}}"
+}
+
+vars:post-response {
+  orderId: res.body.id
+}
+
+assert {
+  res.status: eq 200
+  res.body: isJson
+  res.body.amount: isNumber
+  res.body.lineItems: isArray
+  res.body.status: eq new
+}
