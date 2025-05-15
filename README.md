@@ -20,7 +20,7 @@ The following diagram shows all the components of the application and main inter
 The application uses the following [Dapr Building Blocks](https://docs.dapr.io/developing-applications/building-blocks/) and APIs
 
 - **Service Invocation** — The API gateway calls the four main microservices using HTTP calls to [Dapr service invocation](https://docs.dapr.io/developing-applications/building-blocks/service-invocation/service-invocation-overview/). This provides retries, mTLS and service discovery.
-- **State** — State is held for *users* and *orders* using the [Dapr state management API](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/). The state provider used is Redis, however any other provider could be plugged in without any application code changes.
+- **State** — State is held for _users_ and _orders_ using the [Dapr state management API](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/). The state provider used is Redis, however any other provider could be plugged in without any application code changes.
 - **Pub/Sub** — The submission of new orders through the cart service, is decoupled from the order processing via pub/sub messaging and the [Dapr pub/sub messaging API](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/). New orders are placed on a topic as messages, to be collected by the orders service. This allows the orders service to independently scale and separates our reads & writes
 - **Output Bindings** — To communicate with downstream & 3rd party systems, the [Dapr Bindings API](https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/) is used. This allows the system to carry out tasks such as saving order details into external storage (e.g. Azure Blob) and notify uses with emails via SendGrid
 - **Middleware** — Dapr supports a range of HTTP middleware, for this project traffic rate limiting can enabled on any of the APIs with a single Kubernetes annotation
@@ -29,12 +29,11 @@ The application uses the following [Dapr Building Blocks](https://docs.dapr.io/d
 
 ![](https://img.shields.io/github/last-commit/azure-samples/dapr-store) ![](https://img.shields.io/github/release-date/azure-samples/dapr-store) ![](https://img.shields.io/github/v/release/azure-samples/dapr-store) ![](https://img.shields.io/github/commit-activity/m/azure-samples/dapr-store)
 
-
 # Application Elements & Services
 
 The main elements and microservices that make up the Dapr Store system are described here
 
-Each service uses the [Go REST API Starter Kit & Library](https://github.com/benc-uk/go-rest-api) as a starting basis. Most of the boilerplate and 
+Each service uses the [Go REST API Starter Kit & Library](https://github.com/benc-uk/go-rest-api) as a starting basis. Most of the boilerplate and
 base code for handling requests and generally acting as a RESTful HTTP endpoint is handled by this package.
 
 ## Service Code
@@ -195,8 +194,8 @@ This is a (very) basic guide to running Dapr Store locally. Only instructions fo
 
 - Docker
 - GCC for CGO & go-sqlite3 (apt-get install build-essential)
-- Go v1.20+
-- Node.js v18+
+- Go v1.23+
+- Node.js v20+
 
 ### Setup
 
@@ -207,7 +206,7 @@ wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O 
 dapr init
 ```
 
-First time only, you will need to setup *go-sqlite3* library
+First time only, you will need to setup _go-sqlite3_ library
 
 ```bash
 CGO_ENABLED=1 go install github.com/mattn/go-sqlite3
@@ -239,7 +238,7 @@ A makefile is provided to assist working with the project and building/running i
 help                 💬 This help message :)
 lint                 🔎 Lint & format, check to be run in CI, sets exit code on error
 lint-fix             📝 Lint & format, fixes errors and modifies code
-test                 🎯 Unit tests for services and snapshot tests for SPA frontend 
+test                 🎯 Unit tests for services and snapshot tests for SPA frontend
 test-reports         📜 Unit tests with coverage and test reports (deprecated)
 bundle               💻 Build and bundle the frontend Vue SPA
 clean                🧹 Clean the project, remove modules, binaries and outputs
@@ -277,12 +276,12 @@ All services support the following environmental variables. All settings are opt
 - `AUTH_CLIENT_ID` - Used to enable integration with Azure AD for identity and authentication. Default is _blank_, which runs the service with no identity backend. See the [security, identity & authentication docs](#security-identity--authentication) for more details.
 - `DAPR_STORE_NAME` - Name of the Dapr state component to use. Default is `statestore`
 
-The following vars are used only by the *Cart* and *Orders* services:
+The following vars are used only by the _Cart_ and _Orders_ services:
 
 - `DAPR_ORDERS_TOPIC` - Name of the Dapr pub/sub topic to use for orders. Default is `orders-queue`
 - `DAPR_PUBSUB_NAME` - Name of the Dapr pub/sub component to use for orders. Default is `pubsub`
 
-The following vars are only used by the *Orders* service:
+The following vars are only used by the _Orders_ service:
 
 - `DAPR_EMAIL_NAME` - Name of the Dapr SendGrid component to use for sending order emails. Default is `orders-email`
 - `DAPR_REPORT_NAME` - Name of the Dapr Azure Blob component to use for saving order reports. Default is `orders-report`

@@ -23,7 +23,7 @@ type UserService struct {
 var mockUsers []spec.User
 
 func init() {
-	mockJSON, err := os.ReadFile("../../testing/mock-data/users.json")
+	mockJSON, err := os.ReadFile("../../data/mock/users.json")
 	if err != nil {
 		panic(err)
 	}

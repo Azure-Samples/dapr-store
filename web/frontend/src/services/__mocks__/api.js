@@ -10,7 +10,7 @@ const fs = require('fs')
 
 // Load mock data, which we put beside the tests
 // eslint-disable-next-line
-const mockDataDir = __dirname + '/../../../../../testing/mock-data'
+const mockDataDir = __dirname + '/../../../../../data/mock'
 let mockJson = fs.readFileSync(`${mockDataDir}/carts.json`)
 const mockCarts = JSON.parse(mockJson)
 mockJson = fs.readFileSync(`${mockDataDir}/orders.json`)

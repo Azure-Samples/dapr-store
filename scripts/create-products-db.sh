@@ -3,9 +3,10 @@
 #
 # Build the cmd/products/sqlite.db database file
 #
+repoRoot=$(git rev-parse --show-toplevel)
 
-outputDb=${1:-"cmd/products/sqlite.db"}
-inputCsv=${2:-"etc/products.csv"}
+outputDb=${1:-"${repoRoot}/cmd/products/sqlite.db"}
+inputCsv=${2:-"${repoRoot}/scripts/products.csv"}
 
 echo "🠶🠶🠶 Will create or update: $outputDb"
 echo "🠶🠶🠶 Droping products table"

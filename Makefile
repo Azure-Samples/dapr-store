@@ -14,6 +14,7 @@ IMAGE_REG ?= ghcr.io
 IMAGE_REPO ?= azure-samples/dapr-store
 IMAGE_TAG ?= latest
 IMAGE_PREFIX := $(IMAGE_REG)/$(IMAGE_REPO)
+API_ENDPOINT := http://localhost:9000/v1.0/invoke
 
 .EXPORT_ALL_VARIABLES:
 .PHONY: help lint lint-fix test test-reports docker-build docker-run docker-stop docker-push bundle clean run stop
@@ -34,6 +35,9 @@ test:  ## 🎯 Unit tests for services and snapshot tests for SPA frontend
 	go test -v -count=1 ./$(SERVICE_DIR)/...
 	@cd $(FRONTEND_DIR); npm run test:unit
 
+test-api:  ## 🧪 Run API integration tests wityh httpYac
+	 npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT)
+
 frontend: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
 	cd $(FRONTEND_DIR); npm run build
 	cd $(SERVICE_DIR)/frontend-host; go build
@@ -48,6 +52,9 @@ clean:  ## 🧹 Clean the project, remove modules, binaries and outputs
 	rm -rf $(SERVICE_DIR)/users/users
 	rm -rf $(SERVICE_DIR)/products/products
 	rm -rf $(SERVICE_DIR)/frontend-host/frontend-host
+
+clear-state: ## 💥 Clear all state from Redis (wipe the database)
+	docker run --rm --network host redis redis-cli flushall
 
 run: $(FRONTEND_DIR)/node_modules ## 🚀 Start & run everything locally as processes
 	cd $(FRONTEND_DIR); npm run dev &
@@ -82,6 +89,8 @@ stop: ## ⛔ Stop & kill everything started locally from `make run`
 	dapr stop --app-id users
 	dapr stop --app-id orders
 	pkill cart; pkill users; pkill orders; pkill products; pkill main
+
+
 
 # ===============================================================================
 

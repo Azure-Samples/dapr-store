@@ -20,7 +20,7 @@ var MockOrders []orderspec.Order
 var mockUserOrders []string
 
 func init() {
-	mockJSON, err := os.ReadFile("../../testing/mock-data/orders.json")
+	mockJSON, err := os.ReadFile("../../data/mock/orders.json")
 	if err != nil {
 		panic(err)
 	}
@@ -30,7 +30,7 @@ func init() {
 		panic(err)
 	}
 
-	mockJSON, err = os.ReadFile("../../testing/mock-data/user-orders.json")
+	mockJSON, err = os.ReadFile("../../data/mock/user-orders.json")
 	if err != nil {
 		panic(err)
 	}
