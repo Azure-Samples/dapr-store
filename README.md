@@ -192,7 +192,7 @@ This is a (very) basic guide to running Dapr Store locally. Only instructions fo
 
 ### Prereqs
 
-- Docker
+- Docker (Podman _might_ work, but I've never tried it)
 - GCC for CGO & go-sqlite3 (apt-get install build-essential)
 - Go v1.23+
 - Node.js v20+
@@ -249,6 +249,7 @@ docker-build         🔨 Build all containers using Docker compose
 docker-push          📤 Push all containers using Docker compose
 docker-stop          🚫 Stop and remove local containers
 stop                 ⛔ Stop & kill everything started locally from `make run`
+api-spec             📜 Generate OpenAPI spec from TypeSpec
 ```
 
 # CI / CD
@@ -263,7 +264,7 @@ A set of CI and CD release GitHub actions workflows are included in `.github/wor
 
 The default mode of operation for the Dapr Store is in "demo mode" where there is no identity provider configured, and no security enforcement on the APIs. This makes it simple to run and allows us to focus on the Dapr aspects of the project. In this mode a demo/dummy user account is used to sign-in and place orders in the store.
 
-Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/) (aka Microsoft Entra ID) as an identity provider. This then supports real user sign-in, and securing of the APIs.
+Optionally Dapr store can be configured utilise the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/) (aka Microsoft Entra ID) as an identity provider. When this is configured, the app supports real user sign-in, and the APIs are secured.
 
 #### [📃 Extra Doc: Security, identity & authentication](./docs/auth-identity/)
 
@@ -282,7 +283,7 @@ The following vars are used only by the _Cart_ and _Orders_ services:
 - `DAPR_ORDERS_TOPIC` - Name of the Dapr pub/sub topic to use for orders. Default is `orders-queue`
 - `DAPR_PUBSUB_NAME` - Name of the Dapr pub/sub component to use for orders. Default is `pubsub`
 
-The following vars are only used by the _Orders_ service:
+The following optional vars are only used by the _Orders_ service:
 
 - `DAPR_EMAIL_NAME` - Name of the Dapr SendGrid component to use for sending order emails. Default is `orders-email`
 - `DAPR_REPORT_NAME` - Name of the Dapr Azure Blob component to use for saving order reports. Default is `orders-report`
