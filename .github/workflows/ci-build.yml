@@ -81,7 +81,18 @@ jobs:
       - name: "Run API integration tests, with report"
         run: |
           make run &
-          sleep 30
+          for i in {1..60}; do
+            if curl -s http://localhost:8080/health | grep "healthy" > /dev/null; then
+              echo "Service is ready!"
+              break
+            fi
+            echo "Waiting for service to be ready..."
+            sleep 1
+          done
+          if [ $i -eq 60 ]; then
+            echo "Service failed to start within 60 seconds."
+            exit 1
+          fi
           make test-api-report
 
       - name: "Test Report (API)"
