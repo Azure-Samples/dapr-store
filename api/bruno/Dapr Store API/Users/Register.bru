@@ -1,0 +1,30 @@
+meta {
+  name: Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{endpoint}}/users/method/register
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "userId": "{{$randomUUID}}",
+    "email": "demo@example.net",
+    "displayName": "API TEST"
+  }
+  
+}
+
+vars:post-response {
+  newUserId: res.body.userId
+}
+
+assert {
+  res.status: eq 200
+  res.body.email: isString
+  res.body.registrationStatus: eq success
+}

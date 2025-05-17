@@ -12,13 +12,13 @@ exports[`Cart.vue > renders cart contents 1`] = `
     <div data-v-7d4f60e4="" class="card m-3 p-1" header-bg-variant="primary" header-text-variant="white">
       <div data-v-7d4f60e4="" class="card-header">Top Hat (6″)</div>
       <div data-v-7d4f60e4="" class="card-body">
-        <h2 data-v-7d4f60e4="">Count:</h2><input data-v-7d4f60e4="" type="text" readonly="" class="m-3"><button data-v-7d4f60e4="" class="btn btn-warning p-2 px-3 mx-3"><i data-v-7d4f60e4="" class="fa-solid fa-circle-minus"></i></button><button data-v-7d4f60e4="" class="btn btn-success p-2 px-3"><i data-v-7d4f60e4="" class="fa-solid fa-circle-plus"></i></button><img data-v-7d4f60e4="" src="/img/catalog/1.jpg" class="thumb">
+        <h2 data-v-7d4f60e4="">Count:</h2><input data-v-7d4f60e4="" type="text" readonly="" class="m-3" value="2"><button data-v-7d4f60e4="" class="btn btn-warning p-2 px-3 mx-3"><i data-v-7d4f60e4="" class="fa-solid fa-circle-minus"></i></button><button data-v-7d4f60e4="" class="btn btn-success p-2 px-3"><i data-v-7d4f60e4="" class="fa-solid fa-circle-plus"></i></button><img data-v-7d4f60e4="" src="/img/catalog/1.jpg" class="thumb">
       </div>
     </div>
     <div data-v-7d4f60e4="" class="card m-3 p-1" header-bg-variant="primary" header-text-variant="white">
       <div data-v-7d4f60e4="" class="card-header">Paisley Cravat Ascot Tie</div>
       <div data-v-7d4f60e4="" class="card-body">
-        <h2 data-v-7d4f60e4="">Count:</h2><input data-v-7d4f60e4="" type="text" readonly="" class="m-3"><button data-v-7d4f60e4="" class="btn btn-warning p-2 px-3 mx-3"><i data-v-7d4f60e4="" class="fa-solid fa-circle-minus"></i></button><button data-v-7d4f60e4="" class="btn btn-success p-2 px-3"><i data-v-7d4f60e4="" class="fa-solid fa-circle-plus"></i></button><img data-v-7d4f60e4="" src="/img/catalog/3.jpg" class="thumb">
+        <h2 data-v-7d4f60e4="">Count:</h2><input data-v-7d4f60e4="" type="text" readonly="" class="m-3" value="1"><button data-v-7d4f60e4="" class="btn btn-warning p-2 px-3 mx-3"><i data-v-7d4f60e4="" class="fa-solid fa-circle-minus"></i></button><button data-v-7d4f60e4="" class="btn btn-success p-2 px-3"><i data-v-7d4f60e4="" class="fa-solid fa-circle-plus"></i></button><img data-v-7d4f60e4="" src="/img/catalog/3.jpg" class="thumb">
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 SERVICE_DIR := cmd
 FRONTEND_DIR := web/frontend
-OUTPUT_DIR := ./output
-VERSION ?= 0.8.5
+TEST_OUT_DIR := ./test-reports
+VERSION ?= 0.8.6
 BUILD_INFO ?= "Local makefile build"
 DAPR_RUN_LOGLEVEL := warn
 
@@ -14,6 +14,7 @@ IMAGE_REG ?= ghcr.io
 IMAGE_REPO ?= azure-samples/dapr-store
 IMAGE_TAG ?= latest
 IMAGE_PREFIX := $(IMAGE_REG)/$(IMAGE_REPO)
+API_ENDPOINT := http://localhost:9000/v1.0/invoke
 
 .EXPORT_ALL_VARIABLES:
 .PHONY: help lint lint-fix test test-reports docker-build docker-run docker-stop docker-push bundle clean run stop
@@ -30,16 +31,28 @@ lint-fix: $(FRONTEND_DIR)/node_modules  ## 📝 Lint & format, fixes errors and 
 	golangci-lint run --modules-download-mode=mod --timeout=4m --fix ./...
 	cd $(FRONTEND_DIR); npm run lint-fix
 
-test:  ## 🎯 Unit tests for services and snapshot tests for SPA frontend 
+test: $(FRONTEND_DIR)/node_modules  ## 🎯 Run unit tests for services and snapshot tests for SPA frontend 
 	go test -v -count=1 ./$(SERVICE_DIR)/...
 	@cd $(FRONTEND_DIR); npm run test:unit
+
+test-report: $(FRONTEND_DIR)/node_modules  ## 🎯 Run unit tests and generate report
+	mkdir -p $(TEST_OUT_DIR)
+	go test -v -count=1 ./$(SERVICE_DIR)/... | go-junit-report -set-exit-code > $(TEST_OUT_DIR)/unit.xml
+	@cd $(FRONTEND_DIR); npm run test:unit:report
+
+test-api:  ## 🧪 Run API integration tests with httpYac
+	npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT)
+
+test-api-report:	## 🧪 Run API integration tests with httpYac & generate report
+	mkdir -p $(TEST_OUT_DIR)
+	npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT) --junit > $(TEST_OUT_DIR)/api.xml
 
 frontend: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
 	cd $(FRONTEND_DIR); npm run build
 	cd $(SERVICE_DIR)/frontend-host; go build
 
 clean:  ## 🧹 Clean the project, remove modules, binaries and outputs
-	rm -rf output
+	rm -rf $(TEST_OUT_DIR)
 	rm -rf $(FRONTEND_DIR)/node_modules
 	rm -rf $(FRONTEND_DIR)/dist
 	rm -rf $(FRONTEND_DIR)/coverage
@@ -49,7 +62,10 @@ clean:  ## 🧹 Clean the project, remove modules, binaries and outputs
 	rm -rf $(SERVICE_DIR)/products/products
 	rm -rf $(SERVICE_DIR)/frontend-host/frontend-host
 
-run:  ## 🚀 Start & run everything locally as processes
+clear-state: ## 💥 Clear all state from Redis (wipe the database)
+	docker run --rm --network host redis redis-cli flushall
+
+run: $(FRONTEND_DIR)/node_modules ## 🚀 Start & run everything locally as processes
 	cd $(FRONTEND_DIR); npm run dev &
 	dapr run --app-id cart     --app-port 9001 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/cart &
 	dapr run --app-id products --app-port 9002 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/products ./cmd/products/sqlite.db &
@@ -57,6 +73,7 @@ run:  ## 🚀 Start & run everything locally as processes
 	dapr run --app-id orders   --app-port 9004 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/orders &
 	@sleep 6
 	@./scripts/local-gateway/run.sh &
+	@touch -m /tmp/dapr-store-running
 	@sleep infinity
 	@echo "!!! Processes may still be running, please run `make stop` in order to shutdown everything"
 
@@ -76,12 +93,19 @@ docker-stop: ## 🚫 Stop and remove local containers
 
 stop: ## ⛔ Stop & kill everything started locally from `make run`
 	docker rm -f api-gateway || true
+	rm -f /tmp/dapr-store-running
 	dapr stop --app-id api-gateway
 	dapr stop --app-id cart
 	dapr stop --app-id products
 	dapr stop --app-id users
 	dapr stop --app-id orders
 	pkill cart; pkill users; pkill orders; pkill products; pkill main
+
+api-spec: ## 📜 Generate OpenAPI spec & JSON schemas from TypeSpec
+	cd api/typespec; npm install --silent
+	rm -rf ./api/typespec/out
+	npx --package=@typespec/compiler tsp compile ./api/typespec/ --output-dir ./api/typespec/
+	mv ./api/typespec/out/* ./api/
 
 # ===============================================================================
 

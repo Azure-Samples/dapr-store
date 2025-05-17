@@ -1,0 +1,17 @@
+meta {
+  name: Get Catalog
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{endpoint}}/products/method/catalog
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body[0].id: isNotEmpty
+  res.body: isArray
+}

@@ -1,0 +1,461 @@
+openapi: 3.1.0
+info:
+  title: Dapr Store API
+  version: 0.0.0
+tags:
+  - name: Orders
+  - name: Products
+  - name: Cart
+  - name: Users
+paths:
+  /cart/method/clear/{userId}:
+    put:
+      operationId: CartOperations_clear
+      description: Empty a user's cart
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Cart
+  /cart/method/get/{userId}:
+    get:
+      operationId: CartOperations_get
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Cart
+  /cart/method/setProduct/{userId}/{productId}/{quantity}:
+    put:
+      operationId: CartOperations_setProduct
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: quantity
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Cart
+  /cart/method/submit:
+    post:
+      operationId: CartOperations_submit
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Cart
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+  /orders/method/get/{id}:
+    get:
+      operationId: OrdersOperations_read
+      description: Get details of an order by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Orders
+  /orders/method/getForUser/{userId}:
+    get:
+      operationId: OrdersOperations_forUser
+      description: Get all orders for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Orders
+  /products/method/catalog:
+    get:
+      operationId: ProductsOperations_catalog
+      description: Get all products in the catalog
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Products
+  /products/method/get/{id}:
+    get:
+      operationId: ProductsOperations_get
+      description: Get a single product by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Products
+  /products/method/offers:
+    get:
+      operationId: ProductsOperations_onOffer
+      description: Get all products on offer
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Products
+  /products/method/search/{query}:
+    get:
+      operationId: ProductsOperations_search
+      description: Get all products matching a search term
+      parameters:
+        - name: query
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Products
+  /users/method/get/{userId}:
+    get:
+      operationId: UsersOperations_get
+      description: Get a user by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Users
+  /users/method/isregistered/{userId}:
+    get:
+      operationId: UsersOperations_isRegistered
+      description: |-
+        Check if a user is registered
+        This will return 204 if the user is registered, or 404 if not
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: 'There is no content to send for this request, but the headers may be useful. '
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Users
+  /users/method/register:
+    post:
+      operationId: UsersOperations_register
+      description: Register a new user
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+components:
+  schemas:
+    Cart:
+      type: object
+      required:
+        - products
+        - forUserId
+      properties:
+        products:
+          type: object
+          unevaluatedProperties:
+            type: integer
+            format: int32
+        forUserId:
+          type: string
+    Error:
+      type: object
+      required:
+        - status
+        - type
+        - title
+        - detail
+        - instance
+      properties:
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+    LineItem:
+      type: object
+      required:
+        - count
+        - product
+      properties:
+        count:
+          type: integer
+          format: int32
+        product:
+          $ref: '#/components/schemas/Product'
+    Order:
+      type: object
+      required:
+        - id
+        - title
+        - status
+        - forUser
+        - amount
+        - lineItems
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        forUser:
+          type: string
+        amount:
+          type: number
+          format: float
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+    OrderStatus:
+      type: string
+      enum:
+        - new
+        - received
+        - processing
+        - complete
+    Product:
+      type: object
+      required:
+        - id
+        - name
+        - cost
+        - description
+        - image
+        - onOffer
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        cost:
+          type: number
+          format: float
+        description:
+          type: string
+        image:
+          type: string
+        onOffer:
+          type: boolean
+    User:
+      type: object
+      required:
+        - userId
+        - email
+        - displayName
+      properties:
+        userId:
+          type: string
+        email:
+          type: string
+        displayName:
+          type: string
+        profileImage:
+          type: string
+servers:
+  - url: http://localhost:9000/v1.0/invoke
+    description: Local dev server endpoint
+    variables: {}

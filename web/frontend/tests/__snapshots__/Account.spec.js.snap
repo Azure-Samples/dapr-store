@@ -11,18 +11,20 @@ exports[`Account.vue > renders user profile 1`] = `
     <div data-v-48d1de81="" class="card-body">
       <div data-v-48d1de81="" class="d-flex justify-content-between mb-2">
         <table data-v-48d1de81="" class="details">
-          <tr data-v-48d1de81="">
-            <td data-v-48d1de81="">Display Name</td>
-            <td data-v-48d1de81="">Mock User</td>
-          </tr>
-          <tr data-v-48d1de81="">
-            <td data-v-48d1de81="">Username</td>
-            <td data-v-48d1de81="">demo@example.net</td>
-          </tr>
-          <tr data-v-48d1de81="">
-            <td data-v-48d1de81="">Environment</td>
-            <td data-v-48d1de81="">Fake</td>
-          </tr>
+          <tbody data-v-48d1de81="">
+            <tr data-v-48d1de81="">
+              <td data-v-48d1de81="">Display Name</td>
+              <td data-v-48d1de81="">Mock User</td>
+            </tr>
+            <tr data-v-48d1de81="">
+              <td data-v-48d1de81="">Username</td>
+              <td data-v-48d1de81="">demo@example.net</td>
+            </tr>
+            <tr data-v-48d1de81="">
+              <td data-v-48d1de81="">Environment</td>
+              <td data-v-48d1de81="">Fake</td>
+            </tr>
+          </tbody>
         </table><img data-v-48d1de81="" class="profile d-md-block" src="img/placeholder-profile.jpg">
       </div>
     </div>

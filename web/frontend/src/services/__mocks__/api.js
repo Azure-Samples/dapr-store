@@ -5,10 +5,12 @@
 // Dapr Store frontend - Mock API helper
 // ----------------------------------------------------------------------------
 
+// eslint-disable-next-line
 const fs = require('fs')
 
 // Load mock data, which we put beside the tests
-const mockDataDir = __dirname + '/../../../../../testing/mock-data'
+// eslint-disable-next-line
+const mockDataDir = __dirname + '/../../../../../data/mock'
 let mockJson = fs.readFileSync(`${mockDataDir}/carts.json`)
 const mockCarts = JSON.parse(mockJson)
 mockJson = fs.readFileSync(`${mockDataDir}/orders.json`)

@@ -14,9 +14,10 @@ on:
 permissions:
   contents: read
   packages: write
+  checks: write
 
 env:
-  VERSION: 0.8.5
+  VERSION: 0.8.6
   BUILD_INFO: "Build:development / Workflow:${{ github.workflow }} / RunId:${{ github.run_id }} / Ref:${{ github.ref }} / SHA:${{ github.sha }} / ImageTag:${{ github.run_id }}"
   IMAGE_REG: ghcr.io
   IMAGE_TAG: ${{ github.run_id }}
@@ -24,22 +25,23 @@ env:
 jobs:
   # ===== Testing & code checking ======
   tests-linting:
+    name: "Run Lint & All Tests"
     runs-on: ubuntu-latest
     outputs:
       imageTag: ${{ steps.createTag.outputs.IMAGE_TAG }}
 
     steps:
       - name: "Checkout source"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Set Go version and paths"
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v5
         with:
-          go-version: "^1.21.0"
+          go-version: "^1.24.0"
 
-      - name: "Install extra tools"
+      - name: "Install extra Go tools"
         run: |
-          go install gotest.tools/gotestsum@latest
+          go install github.com/jstemmer/go-junit-report@latest
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
 
       - name: "Check code & lint"
@@ -47,11 +49,57 @@ jobs:
           go get ./...
           make lint
 
-      - name: "Run all unit tests"
-        run: make test
+      - name: "Run all unit tests and generate reports"
+        run: |
+          make test-report
+
+      - name: "Test Report (Frontend)"
+        uses: phoenix-actions/test-reporting@v15
+        if: success() || failure()
+        with:
+          name: Frontend Tests
+          path: test-reports/frontend.xml
+          reporter: java-junit
+
+      - name: "Test Report (Unit Tests)"
+        uses: phoenix-actions/test-reporting@v15
+        if: success() || failure()
+        with:
+          name: Unit Tests
+          path: test-reports/unit.xml
+          reporter: java-junit
+
+      - name: "Dapr tool installer"
+        uses: dapr/setup-dapr@v1
+        with:
+          version: "1.15.1"
+
+      - name: "Initialize Dapr"
+        run: |
+          dapr init
+
+      - name: "Run API integration tests, with report"
+        run: |
+          echo "Starting Dapr Store all components..."
+          make run &
+
+          echo "Waiting for API to start..."
+          ./scripts/url-check.sh http://localhost:9000/v1.0/invoke/products/method/catalog prd001
+
+          echo "Running API tests..."
+          make test-api-report
+
+      - name: "Test Report (API)"
+        uses: phoenix-actions/test-reporting@v15
+        if: success() || failure()
+        with:
+          name: API Integration Tests
+          path: test-reports/api.xml
+          reporter: java-junit
 
   # ===== Build container images ======
   build-images:
+    name: "Build & Push Images"
     runs-on: ubuntu-latest
     needs: tests-linting
     strategy:

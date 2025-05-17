@@ -1,0 +1,142 @@
+# ===================================================================
+# File for httpYac https://httpyac.github.io/
+# Provides a quick way to test & call the API
+# ===================================================================
+
+@endpoint = {{ this.endpoint ?? 'http://localhost:9000/v1.0/invoke' }}
+#@user = 00000000-1111-2222-3333-abcdef123456
+
+#####################################################################
+
+# ===================================================================
+# Users API
+# ===================================================================
+
+### Register new user
+POST {{ endpoint }}/users/method/register
+# @name registerUser
+# @title Register new user
+content-type: application/json
+
+{
+  "userId": "${{$uuid}}",
+  "email": "demo@example.net",
+  "displayName": "API TEST"
+}
+
+?? status == 200
+?? body registrationStatus == success
+
+
+### Check a user
+GET {{ endpoint }}/users/method/isregistered/{{registerUser.userId}}
+
+?? status == 204
+
+
+### Get a user
+GET {{ endpoint }}/users/method/get/{{registerUser.userId}}
+
+?? status == 200
+?? body userId == {{registerUser.userId}}
+?? body email isString
+?? body displayName isString
+
+
+# ===================================================================
+# Products API
+# ===================================================================
+
+### Get all products
+GET {{ endpoint }}/products/method/catalog
+
+?? status == 200
+?? js response.parsedBody[0].id isString
+?? js response.parsedBody[0].name isString
+
+
+### Get products on offer
+GET {{ endpoint }}/products/method/offers
+
+?? status == 200
+?? js response.parsedBody[0].id isString
+?? js response.parsedBody[0].name isString
+
+### Get product by ID
+GET {{ endpoint }}/products/method/get/prd003
+
+?? status == 200
+?? body id == prd003
+?? body name isString
+
+
+### Search products
+GET {{ endpoint }}/products/method/search/Paisley
+
+?? status == 200
+?? js response.parsedBody[0].id isString
+?? js response.parsedBody[0].name isString
+
+
+# ===================================================================
+# Cart API
+# ===================================================================
+
+### Add products to cart
+PUT {{ endpoint }}/cart/method/setProduct/{{registerUser.userId}}/prd001/6
+
+?? status == 200
+?? body forUserId == {{registerUser.userId}}
+?? body products exists
+
+
+### Get cart
+GET {{ endpoint }}/cart/method/get/{{registerUser.userId}}
+
+?? status == 200
+?? body forUserId == {{registerUser.userId}}
+?? body products exists
+
+
+### Submit cart
+# @name submitCart
+# @title Submit cart
+POST {{ endpoint }}/cart/method/submit
+content-type: application/json
+
+"{{registerUser.userId}}"
+
+?? status == 200
+?? body amount isNumber
+?? body id isString
+?? body lineItems isArray
+
+
+### Clear cart
+PUT {{ endpoint }}/cart/method/clear/{{registerUser.userId}}
+
+?? status == 200
+?? body products == {}
+
+
+# ===================================================================
+# Orders API
+# ===================================================================
+
+### Get existing order
+GET {{ endpoint }}/orders/method/get/{{submitCart.id}} 
+
+?? status == 200
+?? body amount isNumber
+?? body id == {{submitCart.id}}
+?? body lineItems isArray
+
+
+### Get orders for user
+GET {{ endpoint }}/orders/method/getForUser/{{registerUser.userId}}
+
+?? status == 200
+?? js response.parsedBody isArray
+?? js response.parsedBody.length > 0
+
+

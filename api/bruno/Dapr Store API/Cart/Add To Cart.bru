@@ -1,0 +1,17 @@
+meta {
+  name: Add To Cart
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{endpoint}}/cart/method/setProduct/{{userId}}/prd001/6
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body: isJson
+  res.body.products: isNotEmpty
+}

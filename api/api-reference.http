@@ -1,0 +1,77 @@
+# ===================================================================
+# File for httpYac https://httpyac.github.io/
+# Provides a quick way to test & call the API
+# ===================================================================
+
+@endpoint = {{ this.endpoint ?? 'http://localhost:9000/v1.0/invoke' }}
+@user = 00000000-1111-2222-3333-abcdef123458
+
+#####################################################################
+
+# ===================================================================
+# Users API
+# ===================================================================
+
+### Register new user
+POST {{ endpoint }}/users/method/register
+# @name registerUser
+content-type: application/json
+
+{
+  "userId": "{{user}}",
+  "email": "demo@example.net",
+  "displayName": "API TEST"
+}
+
+### Check a user
+GET {{ endpoint }}/users/method/isregistered/{{user}}
+
+### Get a user
+GET {{ endpoint }}/users/method/get/{{user}}
+
+# ===================================================================
+# Products API
+# ===================================================================
+
+### Get all products
+GET {{ endpoint }}/products/method/catalog
+
+### Get products on offer
+GET {{ endpoint }}/products/method/offers
+
+### Get product by ID
+GET {{ endpoint }}/products/method/get/prd003
+
+### Search products
+GET {{ endpoint }}/products/method/search/Paisley
+
+# ===================================================================
+# Cart API
+# ===================================================================
+
+### Add products to cart
+PUT {{ endpoint }}/cart/method/setProduct/{{user}}/prd001/6
+
+### Get cart
+GET {{ endpoint }}/cart/method/get/{{user}}
+
+### Submit cart
+# @name submitCart
+POST {{ endpoint }}/cart/method/submit
+content-type: application/json
+
+"{{user}}"
+
+### Clear cart
+PUT {{ endpoint }}/cart/method/clear/{{user}}
+
+
+# ===================================================================
+# Orders API
+# ===================================================================
+
+### Get existing order
+GET {{ endpoint }}/orders/method/get/{{submitCart.id}} 
+
+### Get orders for user
+GET {{ endpoint }}/orders/method/getForUser/{{user}}

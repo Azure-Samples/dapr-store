@@ -17,7 +17,7 @@ import (
 
 	"github.com/benc-uk/go-rest-api/pkg/env"
 	"github.com/benc-uk/go-rest-api/pkg/static"
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 	_ "github.com/joho/godotenv/autoload" // Autoloads .env file if it exists
 )
 

@@ -1,0 +1,23 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: Product.yaml
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  cost:
+    type: number
+  description:
+    type: string
+  image:
+    type: string
+  onOffer:
+    type: boolean
+required:
+  - id
+  - name
+  - cost
+  - description
+  - image
+  - onOffer

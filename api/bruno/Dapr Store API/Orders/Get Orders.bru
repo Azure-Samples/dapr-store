@@ -1,0 +1,16 @@
+meta {
+  name: Get Orders
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{endpoint}}/orders/method/getForUser/{{userId}}
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body: isArray
+}

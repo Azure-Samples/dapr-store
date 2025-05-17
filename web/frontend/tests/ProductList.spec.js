@@ -7,7 +7,8 @@ import ProductList from '@/components/ProductList.vue'
 vi.mock('@/services/api')
 
 // Load mock data
-const mockJson = require('fs').readFileSync(__dirname + '/../../../testing/mock-data/products.json')
+// eslint-disable-next-line no-undef
+const mockJson = require('fs').readFileSync(__dirname + '/../../../data/mock/products.json')
 const mockProducts = JSON.parse(mockJson)
 
 describe('ProductList.vue', () => {

@@ -1,7 +1,7 @@
 # ===================================================================================
 # === Stage 1: Build static serving host ============================================
 # ===================================================================================
-FROM golang:1.21-alpine as server-build
+FROM golang:1.24-alpine AS server-build
 
 WORKDIR /build
 
@@ -23,7 +23,7 @@ RUN GO111MODULE=on CGO_ENABLED=0 GOOS=linux go build \
 # ================================================================================================
 # === Stage 2: Build and bundle the Vue.js app with Vue CLI 3 ====================================
 # ================================================================================================
-FROM node:20-alpine as frontend-build
+FROM node:22-alpine AS frontend-build
 
 ARG VERSION="0.0.1"
 ARG BUILD_INFO="Not provided"
@@ -38,7 +38,7 @@ RUN npm version $VERSION --allow-same-version
 RUN npm install --silent
 
 # Copy in the Vue.js app source
-COPY web/frontend/.eslintrc.cjs .
+#COPY web/frontend/.eslintrc.cjs .
 COPY web/frontend/vite.config.js .
 COPY web/frontend/index.html .
 COPY web/frontend/public ./public

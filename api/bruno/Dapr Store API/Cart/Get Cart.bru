@@ -1,0 +1,17 @@
+meta {
+  name: Get Cart
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{endpoint}}/cart/method/get/{{userId}}
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body: isJson
+  res.body.products: isNotEmpty
+}

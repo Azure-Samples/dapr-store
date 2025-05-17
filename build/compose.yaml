@@ -56,7 +56,7 @@ services:
     ports:
       - "9002:9002"
     environment:
-      - DAPR_GRPC_PORT=50002      
+      - DAPR_GRPC_PORT=50002
     network_mode: host
 
   users:
@@ -71,7 +71,7 @@ services:
         SERVICE_PORT: 9003
         SERVICE_NAME: users
     ports:
-      - "9003:9003" 
+      - "9003:9003"
     environment:
       - DAPR_GRPC_PORT=50003
     network_mode: host
@@ -90,45 +90,102 @@ services:
     ports:
       - "9004:9004"
     environment:
-      - DAPR_GRPC_PORT=50004      
-    network_mode: host       
+      - DAPR_GRPC_PORT=50004
+    network_mode: host
 
   # ==============================================
   # Dapr sidecars needed for the above services
   # ==============================================
 
   cart-dapr:
-    image: "daprio/daprd:1.12.2"
-    command: [ "./daprd", "--app-id", "cart", "--app-port", "9001", "--dapr-grpc-port", "50009", "--dapr-http-port", "3501", "--components-path", "/components", "--enable-metrics=false"]
+    image: "daprio/daprd:1.15.4"
+    command:
+      [
+        "./daprd",
+        "--app-id",
+        "cart",
+        "--app-port",
+        "9001",
+        "--dapr-grpc-port",
+        "50009",
+        "--dapr-http-port",
+        "3505",
+        "--components-path",
+        "/components",
+        "--enable-metrics=false",
+      ]
     depends_on:
       - cart
     network_mode: "service:cart"
     volumes:
-    - "../components/:/components"
+      - "../components/:/components"
 
   products-dapr:
-    image: "daprio/daprd:1.12.2"
-    command: [ "./daprd", "--app-id", "products", "--app-port", "9002", "--dapr-grpc-port", "50002", "--dapr-http-port", "3502", "--components-path", "/components", "--enable-metrics=false"]
+    image: "daprio/daprd:1.15.4"
+    command:
+      [
+        "./daprd",
+        "--app-id",
+        "products",
+        "--app-port",
+        "9002",
+        "--dapr-grpc-port",
+        "50002",
+        "--dapr-http-port",
+        "3502",
+        "--components-path",
+        "/components",
+        "--enable-metrics=false",
+      ]
     depends_on:
       - products
     network_mode: "service:products"
     volumes:
-    - "../components/:/components"
+      - "../components/:/components"
 
   users-dapr:
-    image: "daprio/daprd:1.12.2"
-    command: [ "./daprd", "--app-id", "users", "--app-port", "9003", "--dapr-grpc-port", "50003", "--dapr-http-port", "3503", "--components-path", "/components", "--enable-metrics=false"]
+    image: "daprio/daprd:1.15.4"
+    command:
+      [
+        "./daprd",
+        "--app-id",
+        "users",
+        "--app-port",
+        "9003",
+        "--dapr-grpc-port",
+        "50003",
+        "--dapr-http-port",
+        "3503",
+        "--components-path",
+        "/components",
+        "--enable-metrics=false",
+      ]
     depends_on:
       - users
-    network_mode: "service:users"   
+    network_mode: "service:users"
     volumes:
-    - "../components/:/components"
+      - "../components/:/components"
 
   orders-dapr:
-    image: "daprio/daprd:1.12.2"
-    command: [ "./daprd", "--app-id", "orders", "--app-port", "9004", "--dapr-grpc-port", "50004", "--dapr-http-port", "3504", "--components-path", "/components", "--enable-metrics", "false"]
+    image: "daprio/daprd:1.15.4"
+    command:
+      [
+        "./daprd",
+        "--app-id",
+        "orders",
+        "--app-port",
+        "9004",
+        "--dapr-grpc-port",
+        "50004",
+        "--dapr-http-port",
+        "3504",
+        "--components-path",
+        "/components",
+        "--enable-metrics",
+        "false",
+      ]
     depends_on:
       - orders
-    network_mode: "service:orders"  
+    network_mode: "service:orders"
     volumes:
-    - "../components/:/components"    
+      - "../components/:/components"

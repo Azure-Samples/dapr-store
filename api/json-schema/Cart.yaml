@@ -1,0 +1,19 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: Cart.yaml
+type: object
+properties:
+  products:
+    $ref: "#/$defs/RecordInt32"
+  forUserId:
+    type: string
+required:
+  - products
+  - forUserId
+$defs:
+  RecordInt32:
+    type: object
+    properties: {}
+    unevaluatedProperties:
+      type: integer
+      minimum: -2147483648
+      maximum: 2147483647

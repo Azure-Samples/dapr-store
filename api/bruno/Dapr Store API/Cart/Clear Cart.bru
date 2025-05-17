@@ -1,0 +1,17 @@
+meta {
+  name: Clear Cart
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{endpoint}}/cart/method/clear/{{userId}}
+  body: none
+  auth: inherit
+}
+
+assert {
+  res.status: eq 200
+  res.body: isJson
+  res.body.products: isEmpty
+}

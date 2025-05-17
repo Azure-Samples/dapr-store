@@ -1,0 +1,33 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: Order.yaml
+type: object
+properties:
+  id:
+    type: string
+  title:
+    type: string
+  status:
+    $ref: "#/$defs/OrderStatus"
+  forUser:
+    type: string
+  amount:
+    type: number
+  lineItems:
+    type: array
+    items:
+      $ref: LineItem.yaml
+required:
+  - id
+  - title
+  - status
+  - forUser
+  - amount
+  - lineItems
+$defs:
+  OrderStatus:
+    type: string
+    enum:
+      - new
+      - received
+      - processing
+      - complete
