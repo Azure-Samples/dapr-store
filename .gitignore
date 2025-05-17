@@ -19,3 +19,4 @@ web/frontend/coverage
 output/**
 bin/**
 .secrets
+*.xml

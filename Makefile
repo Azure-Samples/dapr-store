@@ -35,8 +35,11 @@ test:  ## 🎯 Unit tests for services and snapshot tests for SPA frontend
 	go test -v -count=1 ./$(SERVICE_DIR)/...
 	@cd $(FRONTEND_DIR); npm run test:unit
 
-test-api:  ## 🧪 Run API integration tests wityh httpYac
+test-api:  ## 🧪 Run API integration tests with httpYac
 	 npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT)
+
+test-api-report:	## 🧪 Run API integration tests with httpYac & generate report
+	 npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT) --junit > api-test-results.xml
 
 frontend: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
 	cd $(FRONTEND_DIR); npm run build

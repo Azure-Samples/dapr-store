@@ -14,6 +14,7 @@ on:
 permissions:
   contents: read
   packages: write
+  checks: write
 
 env:
   VERSION: 0.8.6
@@ -39,12 +40,22 @@ jobs:
 
       - name: "Dapr tool installer"
         uses: dapr/setup-dapr@v1
+        with:
+          version: "1.15.1"
 
       - name: "Run integration tests"
         run: |
           make run &
           sleep 30
-          make test-api
+          make test-api-report
+
+      - name: Test Report (Integration)
+        uses: phoenix-actions/test-reporting@v8
+        if: success() || failure()
+        with:
+          name: Integration Tests
+          path: api-test-results.xml
+          reporter: java-junit
 
       # - name: "Install extra tools"
       #   run: |
