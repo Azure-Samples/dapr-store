@@ -18,7 +18,7 @@ POST {{ endpoint }}/users/method/register
 content-type: application/json
 
 {
-  "userId": "${{user}}",
+  "userId": "{{user}}",
   "email": "demo@example.net",
   "displayName": "API TEST"
 }

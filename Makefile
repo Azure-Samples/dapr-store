@@ -90,7 +90,11 @@ stop: ## ⛔ Stop & kill everything started locally from `make run`
 	dapr stop --app-id orders
 	pkill cart; pkill users; pkill orders; pkill products; pkill main
 
-
+api-spec: ## 📜 Generate OpenAPI spec & JSON schemas from TypeSpec
+	cd api/typespec; npm install --silent
+	rm -rf ./api/typespec/out
+	npx --package=@typespec/compiler tsp compile ./api/typespec/ --output-dir ./api/typespec/
+	mv ./api/typespec/out/* ./api/
 
 # ===============================================================================
 

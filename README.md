@@ -239,9 +239,10 @@ help                 💬 This help message :)
 lint                 🔎 Lint & format, check to be run in CI, sets exit code on error
 lint-fix             📝 Lint & format, fixes errors and modifies code
 test                 🎯 Unit tests for services and snapshot tests for SPA frontend
-test-reports         📜 Unit tests with coverage and test reports (deprecated)
-bundle               💻 Build and bundle the frontend Vue SPA
+test-api             🧪 Run API integration tests wityh httpYac
+frontend             💻 Build and bundle the frontend Vue SPA
 clean                🧹 Clean the project, remove modules, binaries and outputs
+clear-state          💥 Clear all state from Redis (wipe the database)
 run                  🚀 Start & run everything locally as processes
 docker-run           🐋 Run locally using containers and Docker compose
 docker-build         🔨 Build all containers using Docker compose
