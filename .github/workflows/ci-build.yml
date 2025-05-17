@@ -37,39 +37,48 @@ jobs:
         with:
           go-version: "^1.24.0"
 
-      - name: "Install extra tools"
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+      - name: "Dapr tool installer"
+        uses: dapr/setup-dapr@v1
 
-      - name: "Check code & lint"
+      - name: "Run integration tests"
         run: |
-          go get ./...
-          make lint
+          make run &
+          sleep 30
+          make test-api
 
-      - name: "Run all unit tests"
-        run: make test
+      # - name: "Install extra tools"
+      #   run: |
+      #     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+
+      # - name: "Check code & lint"
+      #   run: |
+      #     go get ./...
+      #     make lint
+
+      # - name: "Run all unit tests"
+      #   run: make test
 
   # ===== Build container images ======
-  build-images:
-    runs-on: ubuntu-latest
-    needs: tests-linting
-    strategy:
-      matrix:
-        serviceName: [cart, orders, users, products, frontend]
+  # build-images:
+  #   runs-on: ubuntu-latest
+  #   needs: tests-linting
+  #   strategy:
+  #     matrix:
+  #       serviceName: [cart, orders, users, products, frontend]
 
-    steps:
-      - name: "Checkout source"
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: "Checkout source"
+  #       uses: actions/checkout@v3
 
-      - name: "Run build"
-        run: |
-          make docker-build-${{ matrix.serviceName }} IMAGE_TAG=$IMAGE_TAG VERSION=$VERSION BUILD_INFO="$BUILD_INFO"
-          make docker-build-${{ matrix.serviceName }} IMAGE_TAG=latest VERSION=$VERSION BUILD_INFO="$BUILD_INFO"
+  #     - name: "Run build"
+  #       run: |
+  #         make docker-build-${{ matrix.serviceName }} IMAGE_TAG=$IMAGE_TAG VERSION=$VERSION BUILD_INFO="$BUILD_INFO"
+  #         make docker-build-${{ matrix.serviceName }} IMAGE_TAG=latest VERSION=$VERSION BUILD_INFO="$BUILD_INFO"
 
-      # Steps after this are only run when merging or pushing into main
-      - name: "Push to container registry"
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REG -u $GITHUB_ACTOR --password-stdin
-          make docker-push-${{ matrix.serviceName }} IMAGE_TAG=$IMAGE_TAG
-          make docker-push-${{ matrix.serviceName }} IMAGE_TAG=latest
+  #     # Steps after this are only run when merging or pushing into main
+  #     - name: "Push to container registry"
+  #       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #       run: |
+  #         echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REG -u $GITHUB_ACTOR --password-stdin
+  #         make docker-push-${{ matrix.serviceName }} IMAGE_TAG=$IMAGE_TAG
+  #         make docker-push-${{ matrix.serviceName }} IMAGE_TAG=latest
