@@ -80,19 +80,13 @@ jobs:
 
       - name: "Run API integration tests, with report"
         run: |
+          echo "Starting Dapr Store all components..."
           make run &
-          for i in {1..60}; do
-            if curl -s http://localhost:8080/health | grep "healthy" > /dev/null; then
-              echo "Service is ready!"
-              break
-            fi
-            echo "Waiting for service to be ready..."
-            sleep 1
-          done
-          if [ $i -eq 60 ]; then
-            echo "Service failed to start within 60 seconds."
-            exit 1
-          fi
+
+          echo "Waiting for API to start..."
+          ./scripts/url-check.sh http://localhost:9000/v1.0/invoke/products/method/catalog prd001
+
+          echo "Running API tests..."
           make test-api-report
 
       - name: "Test Report (API)"
