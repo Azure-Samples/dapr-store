@@ -21,3 +21,4 @@ test-reports/
 bin/**
 .secrets
 *.xml
+running

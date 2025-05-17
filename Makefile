@@ -73,6 +73,7 @@ run: $(FRONTEND_DIR)/node_modules ## 🚀 Start & run everything locally as proc
 	dapr run --app-id orders   --app-port 9004 --log-level $(DAPR_RUN_LOGLEVEL) go run github.com/azure-samples/dapr-store/cmd/orders &
 	@sleep 6
 	@./scripts/local-gateway/run.sh &
+	@touch -m /tmp/dapr-store-running
 	@sleep infinity
 	@echo "!!! Processes may still be running, please run `make stop` in order to shutdown everything"
 
@@ -92,6 +93,7 @@ docker-stop: ## 🚫 Stop and remove local containers
 
 stop: ## ⛔ Stop & kill everything started locally from `make run`
 	docker rm -f api-gateway || true
+	rm -f /tmp/dapr-store-running
 	dapr stop --app-id api-gateway
 	dapr stop --app-id cart
 	dapr stop --app-id products

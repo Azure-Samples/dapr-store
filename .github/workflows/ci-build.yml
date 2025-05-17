@@ -81,7 +81,7 @@ jobs:
       - name: "Run API integration tests, with report"
         run: |
           make run &
-          sleep 30
+          inotifywait -e create /tmp --include 'running'
           make test-api-report
 
       - name: "Test Report (API)"
