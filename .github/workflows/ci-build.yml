@@ -40,6 +40,7 @@ jobs:
 
       - name: "Install golangci-lint"
         run: |
+          go install github.com/jstemmer/go-junit-report@latest
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
 
       - name: "Check code & lint"
@@ -49,7 +50,6 @@ jobs:
 
       - name: "Run all unit tests and generate reports"
         run: |
-          go get -u github.com/jstemmer/go-junit-report
           make test-report
 
       - name: "Dapr tool installer"
@@ -61,7 +61,7 @@ jobs:
         run: |
           dapr init
 
-      - name: "Run integration tests"
+      - name: "Run API integration tests, with report"
         run: |
           make run &
           sleep 30

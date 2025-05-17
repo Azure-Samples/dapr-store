@@ -31,12 +31,12 @@ lint-fix: $(FRONTEND_DIR)/node_modules  ## 📝 Lint & format, fixes errors and 
 	golangci-lint run --modules-download-mode=mod --timeout=4m --fix ./...
 	cd $(FRONTEND_DIR); npm run lint-fix
 
-test:  ## 🎯 Run unit tests for services and snapshot tests for SPA frontend 
+test: $(FRONTEND_DIR)/node_modules  ## 🎯 Run unit tests for services and snapshot tests for SPA frontend 
 	go test -v -count=1 ./$(SERVICE_DIR)/...
 	@cd $(FRONTEND_DIR); npm run test:unit
 
-test-report:  ## 🎯 Run unit tests and generate report
-	go test -v -count=1 ./$(SERVICE_DIR)/... | go-junit-report > unit-test-report.xml
+test-report: $(FRONTEND_DIR)/node_modules  ## 🎯 Run unit tests and generate report
+	go test -v -count=1 ./$(SERVICE_DIR)/... | go-junit-report -set-exit-code > unit-test-report.xml
 	@cd $(FRONTEND_DIR); npm run test:unit:report
 
 test-api:  ## 🧪 Run API integration tests with httpYac
