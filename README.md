@@ -27,7 +27,7 @@ The application uses the following [Dapr Building Blocks](https://docs.dapr.io/d
 
 # Project Status
 
-![](https://img.shields.io/github/last-commit/azure-samples/dapr-store) ![](https://img.shields.io/github/release-date/azure-samples/dapr-store) ![](https://img.shields.io/github/v/release/azure-samples/dapr-store) ![](https://img.shields.io/github/commit-activity/m/azure-samples/dapr-store)
+![](https://img.shields.io/github/last-commit/azure-samples/dapr-store) ![](https://img.shields.io/github/release-date/azure-samples/dapr-store) ![](https://img.shields.io/github/v/release/azure-samples/dapr-store) ![](https://img.shields.io/github/commit-activity/m/azure-samples/dapr-store) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Azure-Samples/dapr-store/ci-build.yml?branch=main)
 
 # Application Elements & Services
 
