@@ -36,7 +36,7 @@ test: $(FRONTEND_DIR)/node_modules  ## 🎯 Run unit tests for services and snap
 	@cd $(FRONTEND_DIR); npm run test:unit
 
 test-report: $(FRONTEND_DIR)/node_modules  ## 🎯 Run unit tests and generate report
-	go test -v -count=1 ./$(SERVICE_DIR)/... | go-junit-report -set-exit-code > unit-test-report.xml
+	go test -v -count=1 ./$(SERVICE_DIR)/... | go-junit-report -set-exit-code > unit-test-results.xml
 	@cd $(FRONTEND_DIR); npm run test:unit:report
 
 test-api:  ## 🧪 Run API integration tests with httpYac
