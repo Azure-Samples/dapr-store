@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest run",
-    "test:unit:report": "vitest run --reporter=junit > ../../frontend-test-results.xml",
+    "test:unit:report": "vitest run --reporter=junit > ../../test-reports/frontend.xml",
     "test:unit:update": "vitest run -u",
     "test:unit:watch": "vitest watch",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix && prettier --check src",

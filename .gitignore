@@ -17,6 +17,7 @@ components/*.yaml
 web/frontend/coverage
 **/node_modules/**
 output/**
+test-reports/
 bin/**
 .secrets
 *.xml

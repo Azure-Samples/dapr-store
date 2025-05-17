@@ -1,6 +1,6 @@
 SERVICE_DIR := cmd
 FRONTEND_DIR := web/frontend
-OUTPUT_DIR := ./output
+TEST_OUT_DIR := ./test-reports
 VERSION ?= 0.8.6
 BUILD_INFO ?= "Local makefile build"
 DAPR_RUN_LOGLEVEL := warn
@@ -36,21 +36,23 @@ test: $(FRONTEND_DIR)/node_modules  ## 🎯 Run unit tests for services and snap
 	@cd $(FRONTEND_DIR); npm run test:unit
 
 test-report: $(FRONTEND_DIR)/node_modules  ## 🎯 Run unit tests and generate report
-	go test -v -count=1 ./$(SERVICE_DIR)/... | go-junit-report -set-exit-code > unit-test-results.xml
+	mkdir -p $(TEST_OUT_DIR)
+	go test -v -count=1 ./$(SERVICE_DIR)/... | go-junit-report -set-exit-code > $(TEST_OUT_DIR)/unit.xml
 	@cd $(FRONTEND_DIR); npm run test:unit:report
 
 test-api:  ## 🧪 Run API integration tests with httpYac
-	 npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT)
+	npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT)
 
 test-api-report:	## 🧪 Run API integration tests with httpYac & generate report
-	 npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT) --junit > api-test-results.xml
+	mkdir -p $(TEST_OUT_DIR)
+	npx httpyac send api/api-tests.http --all --output short --var endpoint=$(API_ENDPOINT) --junit > $(TEST_OUT_DIR)/api.xml
 
 frontend: $(FRONTEND_DIR)/node_modules  ## 💻 Build and bundle the frontend Vue SPA
 	cd $(FRONTEND_DIR); npm run build
 	cd $(SERVICE_DIR)/frontend-host; go build
 
 clean:  ## 🧹 Clean the project, remove modules, binaries and outputs
-	rm -rf output
+	rm -rf $(TEST_OUT_DIR)
 	rm -rf $(FRONTEND_DIR)/node_modules
 	rm -rf $(FRONTEND_DIR)/dist
 	rm -rf $(FRONTEND_DIR)/coverage
@@ -59,7 +61,6 @@ clean:  ## 🧹 Clean the project, remove modules, binaries and outputs
 	rm -rf $(SERVICE_DIR)/users/users
 	rm -rf $(SERVICE_DIR)/products/products
 	rm -rf $(SERVICE_DIR)/frontend-host/frontend-host
-	rm -rf *.xml
 
 clear-state: ## 💥 Clear all state from Redis (wipe the database)
 	docker run --rm --network host redis redis-cli flushall
