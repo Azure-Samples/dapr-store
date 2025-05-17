@@ -81,7 +81,7 @@ jobs:
       - name: "Run API integration tests, with report"
         run: |
           make run &
-          inotifywait -e create /tmp --include 'running'
+          inotifywait -e create /tmp --include 'dapr-store-running'
           make test-api-report
 
       - name: "Test Report (API)"
