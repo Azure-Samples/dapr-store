@@ -19,7 +19,7 @@ require (
 	github.com/elastic/go-windows v1.0.0 // indirect
 	github.com/go-chi/chi v4.1.1+incompatible // indirect
 	github.com/go-chi/cors v1.2.1 // indirect
-	github.com/golang-jwt/jwt/v5 v5.1.0 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/uuid v1.3.1 // indirect
 	github.com/joeshaw/multierror v0.0.0-20140124173710-69b34d4ec901 // indirect
