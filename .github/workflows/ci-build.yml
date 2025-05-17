@@ -43,6 +43,10 @@ jobs:
         with:
           version: "1.15.1"
 
+      - name: "Initialize Dapr"
+        run: |
+          dapr init
+
       - name: "Run integration tests"
         run: |
           make run &
@@ -50,7 +54,7 @@ jobs:
           make test-api-report
 
       - name: Test Report (Integration)
-        uses: phoenix-actions/test-reporting@v8
+        uses: phoenix-actions/test-reporting@v15
         if: success() || failure()
         with:
           name: Integration Tests
