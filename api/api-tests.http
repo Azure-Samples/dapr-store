@@ -15,6 +15,7 @@
 ### Register new user
 POST {{ endpoint }}/users/method/register
 # @name registerUser
+# @title Register new user
 content-type: application/json
 
 {
@@ -99,6 +100,7 @@ GET {{ endpoint }}/cart/method/get/{{registerUser.userId}}
 
 ### Submit cart
 # @name submitCart
+# @title Submit cart
 POST {{ endpoint }}/cart/method/submit
 content-type: application/json
 
