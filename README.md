@@ -239,7 +239,9 @@ help                 💬 This help message :)
 lint                 🔎 Lint & format, check to be run in CI, sets exit code on error
 lint-fix             📝 Lint & format, fixes errors and modifies code
 test                 🎯 Unit tests for services and snapshot tests for SPA frontend
-test-api             🧪 Run API integration tests wityh httpYac
+test-report          🎯 Unit tests and generate report
+test-api             🧪 Run API integration tests with httpYac
+test-api-report      🧪 Run API integration tests with httpYac & generate report
 frontend             💻 Build and bundle the frontend Vue SPA
 clean                🧹 Clean the project, remove modules, binaries and outputs
 clear-state          💥 Clear all state from Redis (wipe the database)
@@ -249,7 +251,7 @@ docker-build         🔨 Build all containers using Docker compose
 docker-push          📤 Push all containers using Docker compose
 docker-stop          🚫 Stop and remove local containers
 stop                 ⛔ Stop & kill everything started locally from `make run`
-api-spec             📜 Generate OpenAPI spec from TypeSpec
+api-spec             📜 Generate OpenAPI spec & JSON schemas from TypeSpec
 ```
 
 # CI / CD
