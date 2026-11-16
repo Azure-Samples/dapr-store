@@ -32,10 +32,10 @@ jobs:
 
     steps:
       - name: "Checkout source"
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: "Set Go version and paths"
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
         with:
           go-version: "^1.24.0"
 
@@ -54,7 +54,7 @@ jobs:
           make test-report
 
       - name: "Test Report (Frontend)"
-        uses: phoenix-actions/test-reporting@v15
+        uses: phoenix-actions/test-reporting@f957cd93fc2d848d556fa0d03c57bc79127b6b5e # v15
         if: success() || failure()
         with:
           name: Frontend Tests
@@ -62,7 +62,7 @@ jobs:
           reporter: java-junit
 
       - name: "Test Report (Unit Tests)"
-        uses: phoenix-actions/test-reporting@v15
+        uses: phoenix-actions/test-reporting@f957cd93fc2d848d556fa0d03c57bc79127b6b5e # v15
         if: success() || failure()
         with:
           name: Unit Tests
@@ -70,7 +70,7 @@ jobs:
           reporter: java-junit
 
       - name: "Dapr tool installer"
-        uses: dapr/setup-dapr@v1
+        uses: dapr/setup-dapr@ffde132592c51fcb876dff3925598fd150137569 # v1
         with:
           version: "1.15.1"
 
@@ -90,7 +90,7 @@ jobs:
           make test-api-report
 
       - name: "Test Report (API)"
-        uses: phoenix-actions/test-reporting@v15
+        uses: phoenix-actions/test-reporting@f957cd93fc2d848d556fa0d03c57bc79127b6b5e # v15
         if: success() || failure()
         with:
           name: API Integration Tests
@@ -108,7 +108,7 @@ jobs:
 
     steps:
       - name: "Checkout source"
-        uses: actions/checkout@v3
+        uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3.7.0
 
       - name: "Run build"
         run: |
